@@ -1,0 +1,88 @@
+This line should be hidden.
+
+This is an iPhone style.
+
+Having trouble reading this newsletter? Click here to see it in
+your browser
+
+**************
+Premailer Test
+**************
+
+-----------------
+Lorem ipsum dolor
+-----------------
+
+Suspendisse id velit vitae ligula volutpat condimentum
+------------------------------------------------------
+
+Morbi commodo, ipsum sed
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi
+commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id
+pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse
+id velit vitae ligula volutpat condimentum. Aliquam erat
+volutpat. Sed quis velit. Nulla facilisi (
+http://premailer.dialect.ca/ ). Nulla libero.
+
+Here’s a quote.  Here’s a quote.  “Here’s a quote in
+quotes”.
+
+cédille cé garçon garçon à à
+
+Nullam sit amet enim. Suspendisse id velit vitae ligula volutpat
+condimentum. Aliquam erat volutpat. Sed quis velit. Nulla
+facilisi.
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi
+commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id
+pulvinar odio lorem non turpis. Nullam sit amet enim. Suspendisse
+id velit vitae ligula volutpat condimentum. Aliquam erat
+volutpat. Sed quis velit. Nulla facilisi. Nulla libero.
+
+“Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+Morbi commodo, ipsum sed pharetra gravida, orci magna rhoncus
+neque, id pulvinar odio lorem non turpis.”
+
+Aliquam erat volutpat. Sed quis velit. Nulla facilisi. Nulla
+libero.
+
+Link tests
+----------
+
+* Relative path to root ( http://premailer.dialect.ca/ )
+* Absolute path to root ( http://premailer.dialect.ca/ )
+* Different domain ( http://example.com/ )
+* Relative path to sub-directory (
+http://premailer.dialect.ca/tests/images/ )
+* Link is not converted ( #relative )
+* Funky ASP URL (
+http://example.com/test.html?cn=tf&c=20&ord=%%RANDOM%% )
+* Appends tracking query string (
+http://premailer.dialect.ca/tests/base.html?query=string )
+* Link is not converted ( {DONOTCONVERT} )
+* Link is not converted ( [DONOTCONVERT] )
+* Link is not converted (  )
+* mailto link ( mailto:premailer@example.com )
+* FTP link ( ftp://example.com )
+* Gopher link ( gopher://gopher.floodgap.com/1/fun/twitpher )
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi
+commodo, ipsum sed pharetra gravida, orci magna rhoncus neque, id
+pulvinar odio lorem non turpis.
+
+Premailer Test
+
+by Dialect (
+http://dialect.ca/?utm_source=Premailer&utm_medium=Test+Suite&utm_campaign=Premailer
+)
+
+Vancouver Island, British Columbia
+
+250 555.2222
+
+Newsletter communications by
+(
+http://dialect.ca/dialogue/?utm_source=Dialogue&utm_medium=Credit&utm_campaign=South+Hollow
+)
+Click here to unsubscribe

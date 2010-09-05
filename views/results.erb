@@ -1,0 +1,64 @@
+    <h1><a name="title">Premailer Results</a></h1>
+    <div class="body">
+    <p>We&rsquo;ve processed <%= @source_description %>, and</p>
+    
+    <ul>
+      <li>made all your CSS inline,</li>
+      <li>changed relative links to absolute links,</li>
+      <% unless @results[:options][:link_query_string].nil? or @results[:options][:link_query_string].empty? %><li>appended <tt>?<%= @results[:options][:link_query_string] %></tt> to your links,</li><% end %>
+      <li>moved any CSS pseudo-classes (like <tt>:hover</tt>) to the <tt>&lt;head&gt;</tt>,</li>
+      <li>checked your HTML and CSS for compatibiliy with e-mail programs, and</li>
+      <li>created a plain-text version of your message</li>
+   </ul>
+
+    <div class="thanks meta">Time for some testing?<br>Campaign Monitor offers a thorough<br><a href="http://www.campaignmonitor.com/testing/">e-mail client testing service</a>.</div>
+
+
+    <p>&#x00bb; <a href="<%= @results[:output][:html_file] %>" title="Contents of <%= @url %> with inline CSS">View the HTML results</a></p>
+
+    <textarea cols="80" rows="5" id="html_output" class="premailer_output"><%= @results[:output][:html].to_xs %></textarea>
+
+    <p>&#x00bb; <a href="<%= @results[:output][:txt_file] %>" title="Contents of <%= @url %> converted to plain text">View the plain-text results</a></p>
+
+    <textarea cols="80" rows="5" id="txt_output" class="premailer_output"><%= @results[:output][:txt] %></textarea>
+
+    <script type="text/javascript">
+    <%  action_label = @source_description == 'your HTML content' ? 'Uploaded HTML' : 'Remote file' %>
+    try {
+      pageTracker._trackEvent("Premailer", "Processed", "<%= action_label %>");
+
+    } catch(err) {} 
+    </script>
+    
+<% if @results[:warnings] %>
+<br>
+  <h3>HTML and CSS warnings</h3>
+
+  <% if @results[:warnings].length > 0 %>
+
+  <p>Warnings are generated from several sources, including the <a href="http://www.email-standards.org/">Email Standards Project&rsquo;s guides</a>.</p>
+
+  
+
+  <table class="warnings" id="premailer-warnings" summary="List of HTML and CSS warnings">
+  <thead>
+    <tr>
+      <th>Property</th>
+      <th>Support</th>
+      <th>Unsupported clients</th>
+    </tr>
+    <tbody>
+    <% @results[:warnings].each do |w| %>
+    <tr class="<%= w[:level].downcase %>">
+      <td class="property"><%= w[:message] %></td>
+      <td class="level"><%= w[:level].capitalize %></td>
+      <td><%= w[:clients] %></td>
+    </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+<p>None.</p>
+<% end %>
+<% end %>
+</div>

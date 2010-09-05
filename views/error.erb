@@ -1,0 +1,16 @@
+
+    <h1><a name="title">Premailer Error</a></h1>
+<div class="body">
+    <p>Oh no! An error occurred when processing <%= @source_description %>.</p>
+    
+    <p>Server says: <tt></tt>.</p>
+    </div>
+    
+    
+      <script type="text/javascript">
+      <%  action_label = @source_description == 'your HTML content' ? 'Uploaded HTML' : 'Remote file' %>
+      try {
+        pageTracker._trackEvent("Premailer", "Error", "<%= @message %>");
+
+      } catch(err) {} 
+      </script>

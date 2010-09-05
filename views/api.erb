@@ -1,0 +1,176 @@
+    <h2>Premailer API</h2>
+
+<p>Premailer is now available via an API, so you can tie it in to your own apps.</p>
+
+<p>In order to use the API you&rsquo;ll need an API key; e-mail 'code' at dialect.ca for access.</p>
+
+<h3>Sending a request</h3>
+
+<p>The Premailer API is accessed via an <tt>HTTP POST</tt> to <tt>http://premailer.dialect.ca/api</tt>.</p>
+
+<table summary="Premailer API request fields">
+<caption>Request fields</caption>
+<thead>
+  <tr>
+    <th>Field</th>
+    <th>Data type</th>
+    <th>Description</th>
+    <th>Values</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="property">api_key</td>
+    <td class="type">string (required)</td>
+    <td>API key</td>
+    <td class="values"></td>
+  </tr>
+  <tr>
+    <td class="property">url</td>
+    <td class="type">string (required)</td>
+    <td>URL of the source file</td>
+    <td class="values"></td>
+  </tr>
+  <tr>
+    <td class="property">warn_level</td>
+    <td class="type">int</td>
+    <td>E-mail client warning level</td>
+    <td class="values">
+      <tt>0</tt> = None<br>
+      <tt>1</tt> = Safe<br>
+      <tt>2</tt> = Poor<br>
+      <tt>3</tt> = Risky<br>
+    </td>
+  </tr>
+  <tr>
+    <td class="property">text_line_length</td>
+    <td class="type">int</td>
+    <td>Length of lines in the plain text version</td>
+    <td class="values">Default is <tt>65</tt></td>
+  </tr>
+  <tr>
+    <td class="property">link_query_string</td>
+    <td class="type">string</td>
+    <td>Query string appended to links</td>
+    <td class="values"></td>
+  </tr>
+</tbody>
+</table>
+
+
+
+<h3>Receiving the response</h3>
+
+<p>Premailer serves the response as JSON data with the <tt>application/json</tt> mime type encoded as <tt>UTF-8</tt>.</p>
+
+<table summary="Premailer API response fields">
+<caption>Response fields</caption>
+<thead>
+  <tr>
+    <th>Field</th>
+    <th>Data type</th>
+    <th>Description</th>
+
+    <th>Values</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="property">status</td>
+    <td class="type">int</td>
+    <td>HTTP Response Code</td>
+    <td class="values">
+      <tt>201</tt> on success<br>
+      <tt>400</tt> on error<br>
+      <tt>403</tt> on invalid API key<br>
+    </td>
+  </tr>
+  <tr>
+    <td class="property">message</td>
+    <td class="type">string</td>
+    <td>Response message</td>
+    <td class="values">
+      <tt>Created</tt> on success<br>
+      Error messages include:<br>
+      <tt>Invalid API key</tt><br>
+      <tt>URL was not provided</tt><br>
+    </td>
+  </tr>
+  <tr>
+    <td class="property">url</td>
+    <td class="type">string</td>
+    <td>URL of the source file</td>
+    <td class="values"></td>
+  </tr>
+  <tr>
+    <td class="property">output</td>
+    <td class="type">object/hash</td>
+    <td></td>
+    <td class="values"></td>
+  </tr>
+  <tr>
+    <td class="property">output['html']</td>
+    <td class="type">string</td>
+    <td>URL to processed HTML results</td>
+    <td class="values"></td>
+  </tr>
+  <tr>
+    <td class="property">output['txt']</td>
+    <td class="type">string</td>
+    <td>URL to processed plain-text results</td>
+    <td class="values"></td>
+  </tr>
+  <tr>
+    <td class="property">warnings</td>
+    <td class="type">array</td>
+    <td>Array of e-mail client warning hashes</td>
+    <td class="values">See the sample response below</td>
+  </tr>
+  <tr>
+    <td class="property">options</td>
+    <td class="type">object/hash</td>
+    <td>Configuration options used by Premailer</td>
+    <td class="values"></td>
+  </tr>
+  <tr>
+    <td class="property">options['text_line_length']</td>
+    <td class="type">int</td>
+    <td>See request fields for definition</td>
+    <td class="values"></td>
+  </tr>
+  <tr>
+    <td class="property">options['warn_level']</td>
+    <td class="type">int</td>
+    <td>See request fields for definition</td>
+    <td class="values"></td>
+  </tr>
+  <tr>
+    <td class="property">options['link_query_string']</td>
+    <td class="type">string</td>
+    <td>See request fields for definition</td>
+    <td class="values"></td>
+  </tr>
+</tbody>
+</table>
+
+<h3>Example of a Premailer JSON response</h3>
+<pre><code class="javascript">
+{
+ "status":201,
+ "message":"Created",
+ "source":"http:\/\/premailer.dialect.ca\/test\/test.html",
+ "output": {
+   "html":"http:\/\/premailer.dialect.ca\/_out\/e0ffb35b510fe507b7b55311a1e85ce2.html",
+   "txt":"http:\/\/premailer.dialect.ca\/_out\/e0ffb35b510fe507b7b55311a1e85ce2.txt"
+  },
+ "warnings": [
+   {"type":"CSS","property":"color","clients":"Eudora","level":"SAFE"},
+   {"type":"CSS","property":"margin","clients":"AOL 9, Notes 6, Eudora","level":"RISKY"}
+  ],
+ "options": {
+   "text_line_length":65,
+   "warn_level":1,
+   "link_query_string":null
+  }
+}
+</code></pre>

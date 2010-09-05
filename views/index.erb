@@ -1,0 +1,87 @@
+   
+    <h1><a name="title">Premailer</a></h1>
+    <div class="body">
+
+
+    <form method="post" action="" id="premailer_form">
+    <input type="hidden" name="content_source" id="content_source" value="url">
+    <label class="toggle" for="url" id="process_url_label">&#x00bb; Use a URL as the source</label>
+
+    <div id="process_url">
+      <span class="hint">Don&rsquo;t forget http://.</span>
+      <input type="text" id="url" name="url" value="<%= @initial_doc %>">
+    </div>
+
+
+    <label class="toggle" for="html" id="process_html_label">&#x00bb; Use HTML as the source</label>
+    <div id="process_html">
+      <span class="hint">Note: make sure you use absolute URLs for all your links</span>
+      <textarea id="html" name="html" cols="20" rows="5"></textarea>
+    </div>
+
+    <div class="optional">
+      <label for="querystring">Query string to append to links</label>
+      <input type="text" id="querystring" name="querystring" value="">
+      <span class="hint">Optional, but useful for adding tracking codes.  Do not include the '?'.<br>
+      e.g. <tt>utm_source=newsletter&amp;utm_medium=email&amp;utm_campaign=spring-sale</tt></span>
+    </div>
+    <div class="button">
+      <input type="submit" value="Do it to it!">
+    </div>
+    </form>
+
+  
+
+<div class="thanks meta">Many thanks to <a href="http://www.campaignmonitor.com/">Campaign Monitor</a>, Premailer&rsquo;s sponsor.  They do all this inline CSS voodoo automatically each time you send a message, and their <a href="http://www.campaignmonitor.com/features/screens/send-create.aspx">interface</a> is pretty, easy and powerful. If you haven't checked them out yet I heartily recommend you do.</div>
+
+
+
+  <div id="about-premailer">
+  <h3>What is this?</h3>
+
+  <p>For the best HTML e-mail delivery results, CSS should be inline.  This is a huge pain and a simple newsletter becomes un-managable very quickly.  This script is our solution.</p>
+
+  <ul class="big">
+    <li>CSS styles are converted to inline style attributes<br />
+
+        <span class="sub">Checks <tt>style</tt> and <tt>link[rel=stylesheet]</tt> tags and preserves existing inline attributes</span>
+    </li>
+    <li>Relative paths are converted to absolute paths<br />
+        <span class="sub">Checks links in <tt>href</tt>, <tt>src</tt> and CSS <tt>url('')</tt></span>
+
+    </li>
+    <li>CSS properties are checked against e-mail client capabilities<br />
+        <span class="sub">Based on the <a href="http://www.email-standards.org/">Email Standards Project&rsquo;s guides</a></span>
+    </li>
+    <li>A plain text version is created</li>
+  </ul>
+
+  <p>A few things to note:</p>
+  <ul>
+    <li>Things can get messy very quickly with the <tt>*</tt> selector&mdash;be careful</li>
+    <li>Only the <tt>screen</tt>, <tt>handheld</tt> and <tt>all</tt> media types are processed</li>
+  </ul>
+
+
+  <h3>Bookmarklet</h3>
+  
+  <p>If you&rsquo;re using Firefox 3+, you can use a bookmarklet as a shortcut to processing pages.</p>
+  
+  <p>To install, drag this link up to your toolbar: <a style="background: #eee none; padding: 2px 4px; border: 1px solid #ccc;" title="Make CSS inline with Premailer" href="javascript:(function(){document.body.appendChild(document.createElement('script')).src='http://premailer.dialect.ca/inc/bookmarklet-1.0.js';})();">Premailer</a></p>
+
+
+  <h3>Current status</h3>
+
+  <p>The current version, 1.5.2, has a new home and active development has resumed.  Please update your bookmarks to <a href="http://premailer.dialect.ca/">http://premailer.dialect.ca/</a>. <!-- Most significantly, <a href="/api">Premailer is now available via API</a>. --></p>
+  
+  <p>Updates are announced at <a href="http://twitter.com/TheCHANGELOG">http://twitter.com/TheCHANGELOG</a>.</p>
+
+  <h3>Nuts and bolts</h3>
+
+  <p>Premailer is written in Ruby, with a lot of help from <a href="http://code.whytheluckystiff.net/hpricot/">Hpricot</a> and the <a href="http://www.sinatrarb.com/">Sinatra</a> framework (goodbye eruby).  Premailer is still under active development&mdash;please send on any bugs you encounter.</p>
+  
+  <p>The source is available on <a href="http://github.com/alexdunae/premailer/">GitHub</a>.</p>
+
+  <p>Written by Alex Dunae at Dialect (e-mail 'code' at dialect.ca), 2007-09.</p>
+</div>
+</div>

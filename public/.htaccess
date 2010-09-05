@@ -1,0 +1,10 @@
+Options +FollowSymLinks -Indexes
+
+<Files ~ >
+header append X-Robots-Tag "noarchive"
+</Files>
+
+AddCharset UTF-8 .txt
+
+SetEnv GEM_HOME /home/dialect/.gems
+SetEnv GEM_PATH /home/dialect/.gems:/usr/lib/ruby/gems/1.8

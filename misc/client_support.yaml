@@ -1,0 +1,130 @@
+# Capabilities of e-mail clients
+#
+# Sources
+# * http://campaignmonitor.com/css/
+# * http://www.campaignmonitor.com/blog/archives/2007/04/a_guide_to_css_support_in_emai_2.html
+# * http://www.campaignmonitor.com/blog/archives/2007/11/do_image_maps_work_in_html_ema.html
+# * http://www.campaignmonitor.com/blog/archives/2007/11/how_forms_perform_in_html_emai.html
+# * http://www.xavierfrenette.com/articles/css-support-in-webmail/
+# * http://www.email-standards.org/
+# Updated 2008-08-26
+#
+# Support: 1 = SAFE,  2 = POOR,  3 = RISKY
+clients: 
+  major_clients: [Outlook 2003, Yahoo! Mail, Yahoo! Classic, Hotmail, Apple Mail, Outlook 2007, Google Gmail, Apple iPhone, Notes 6 and 7, Notes 8, AOL 10]
+elements:
+  map:
+    support: 2
+    unsupported_in: [GMail]
+  area:
+    support: 2
+    unsupported_in: [GMail]
+  form:
+    support: 3
+    unsupported_in: [Mobile Me, Old Yahoo, AOL, Live Mail, Outlook 07, Outlook 03]
+  link:
+    support: 2
+    unsupported_in: [GMail, Hotmail, Old Yahoo]
+attributes:
+  ismap:
+    support: 2
+    unsupported_in: [GMail]
+css_properties:
+  direction:
+      unsupported_in: [Outlook 2003, Windows Mail, Apple Mail, Entourage 2008, Notes 8, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, MySpace, AOL Web, MobileMe, iPhone 3.0, Android, Palm Pre (WebOS), Palm Treo (Win Mobile 6.5), Palm Treo (Palm Garnet OS), Blackberry]
+  font:
+      unsupported_in: [Outlook 2007, Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 8, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, Gmail, MySpace, AOL Web, MobileMe, iPhone 3.0, Android, Android Gmail]
+  font-family:
+      unsupported_in: [Outlook 2007, Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 6 and 7, Notes 8, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, Gmail, MySpace, AOL Web, MobileMe, iPhone 3.0, Android, Android Gmail, Palm Pre (WebOS)]
+  font-style:
+      unsupported_in: [Outlook 2007, Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 6 and 7, Notes 8, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, Gmail, MySpace, AOL Web, MobileMe, iPhone 3.0, Android, Android Gmail, Palm Pre (WebOS), Palm Treo (Win Mobile 6.5), Blackberry]
+  font-variant:
+      unsupported_in: [Outlook 2007, Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 8, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, Gmail, MySpace, AOL Web, MobileMe, iPhone 3.0, Android, Android Gmail, Palm Pre (WebOS), Palm Treo (Win Mobile 6.5)]
+  font-size:
+      unsupported_in: [Outlook 2007, Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 6 and 7, Notes 8, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, Gmail, MySpace, AOL Web, MobileMe, iPhone 3.0, Android, Android Gmail, Palm Pre (WebOS), Palm Treo (Win Mobile 6.5), Palm Treo (Palm Garnet OS)]
+  font-weight:
+      unsupported_in: [Outlook 2007, Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 6 and 7, Notes 8, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, Gmail, MySpace, AOL Web, MobileMe, iPhone 3.0, Android, Android Gmail, Palm Pre (WebOS), Palm Treo (Win Mobile 6.5), Palm Treo (Palm Garnet OS), Blackberry]
+  letter-spacing:
+      unsupported_in: [Outlook 2007, Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 8, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, Gmail, MySpace, AOL Web, MobileMe, iPhone 3.0, Android, Android Gmail, Palm Pre (WebOS)]
+  line-height:
+      unsupported_in: [Outlook 2007, Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 8, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, Gmail, AOL Web, MobileMe, iPhone 3.0, Android, Android Gmail, Palm Pre (WebOS), Palm Treo (Win Mobile 6.5)]
+  text-align:
+      unsupported_in: [Outlook 2007, Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 6 and 7, Notes 8, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, Gmail, MySpace, AOL Web, MobileMe, iPhone 3.0, Android, Android Gmail, Palm Pre (WebOS), Palm Treo (Win Mobile 6.5), Palm Treo (Palm Garnet OS), Blackberry]
+  text-decoration:
+      unsupported_in: [Outlook 2007, Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 6 and 7, Notes 8, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, Gmail, MySpace, AOL Web, MobileMe, iPhone 3.0, Android, Android Gmail, Palm Pre (WebOS), Palm Treo (Win Mobile 6.5), Palm Treo (Palm Garnet OS), Blackberry]
+  text-indent:
+      unsupported_in: [Outlook 2007, Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 8, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, Gmail, MySpace, AOL Web, MobileMe, iPhone 3.0, Android, Android Gmail, Palm Pre (WebOS), Palm Treo (Win Mobile 6.5), Palm Treo (Palm Garnet OS)]
+  text-transform:
+      unsupported_in: [Outlook 2007, Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 8, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, Gmail, MySpace, AOL Web, MobileMe, iPhone 3.0, Android, Android Gmail, Palm Pre (WebOS), Palm Treo (Win Mobile 6.5), Blackberry]
+  white-space:
+      unsupported_in: [Outlook 2007, Apple Mail, Entourage 2004, Entourage 2008, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, Gmail, MySpace, MobileMe, iPhone 3.0, Android, Android Gmail, Palm Pre (WebOS)]
+  word-spacing:
+      unsupported_in: [Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 8, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, Gmail, MySpace, AOL Web, MobileMe, iPhone 3.0, Android, Android Gmail, Palm Pre (WebOS)]
+  vertical-align:
+      unsupported_in: [Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 8, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, Gmail, MySpace, AOL Web, MobileMe, iPhone 3.0, Android Gmail, Palm Pre (WebOS), Palm Treo (Win Mobile 6.5), Palm Treo (Palm Garnet OS)]
+  color:
+      unsupported_in: [Outlook 2007, Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 6 and 7, Notes 8, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, Gmail, MySpace, AOL Web, MobileMe, iPhone 3.0, Android, Android Gmail, Palm Pre (WebOS), Palm Treo (Win Mobile 6.5), Palm Treo (Palm Garnet OS), Blackberry]
+  background:
+      unsupported_in: [Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, MySpace, AOL Web, MobileMe, iPhone 3.0, Palm Pre (WebOS), Palm Treo (Win Mobile 6.5), Blackberry]
+  background-color:
+      unsupported_in: [Outlook 2007, Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 8, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, Gmail, MySpace, AOL Web, MobileMe, iPhone 3.0, Android, Android Gmail, Palm Pre (WebOS), Palm Treo (Win Mobile 6.5), Palm Treo (Palm Garnet OS), Blackberry]
+  background-image:
+      unsupported_in: [Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, MySpace, AOL Web, MobileMe, iPhone 3.0, Palm Pre (WebOS), Palm Treo (Win Mobile 6.5), Blackberry]
+  background-position:
+      unsupported_in: [Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, MySpace, AOL Web, MobileMe, iPhone 3.0, Android, Android Gmail, Palm Pre (WebOS), Palm Treo (Win Mobile 6.5), Blackberry]
+  background-repeat:
+      unsupported_in: [Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, MySpace, AOL Web, MobileMe, iPhone 3.0, Palm Pre (WebOS), Palm Treo (Win Mobile 6.5), Blackberry]
+  border:
+      unsupported_in: [Outlook 2007, Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 8, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, Gmail, MySpace, AOL Web, MobileMe, iPhone 3.0, Android, Android Gmail, Palm Pre (WebOS), Palm Treo (Win Mobile 6.5), Palm Treo (Palm Garnet OS), Blackberry]
+  height:
+      unsupported_in: [Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 8, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, Gmail, AOL Web, MobileMe, iPhone 3.0, Android, Android Gmail, Palm Pre (WebOS), Palm Treo (Win Mobile 6.5), Palm Treo (Palm Garnet OS)]
+  margin:
+      unsupported_in: [Outlook 2007, Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 8, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Gmail, MySpace, AOL Web, MobileMe, iPhone 3.0, Android, Android Gmail, Palm Pre (WebOS), Palm Treo (Palm Garnet OS)]
+  padding:
+      unsupported_in: [Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 8, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, Gmail, MySpace, AOL Web, MobileMe, iPhone 3.0, Android, Android Gmail, Palm Pre (WebOS), Palm Treo (Win Mobile 6.5), Palm Treo (Palm Garnet OS), Blackberry]
+  width:
+      unsupported_in: [Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 8, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, Gmail, AOL Web, MobileMe, iPhone 3.0, Android, Android Gmail, Palm Pre (WebOS), Palm Treo (Win Mobile 6.5), Palm Treo (Palm Garnet OS), Blackberry]
+  bottom:
+      unsupported_in: [Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 8, AOL 10, Thunderbird 2, AOL Web, MobileMe, iPhone 3.0, Android, Palm Pre (WebOS)]
+  clear:
+      unsupported_in: [Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 8, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, Gmail, MySpace, AOL Web, MobileMe, iPhone 3.0, Android, Android Gmail, Palm Pre (WebOS), Blackberry]
+  clip:
+      unsupported_in: [Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, AOL 10, Thunderbird 2, AOL Web, iPhone 3.0, Palm Pre (WebOS), Blackberry]
+  cursor:
+      unsupported_in: [Outlook 2003, Windows Mail, Apple Mail, Entourage 2008, Notes 8, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, MySpace, AOL Web, MobileMe]
+  display:
+      unsupported_in: [Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 6 and 7, Notes 8, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, Gmail, MySpace, AOL Web, MobileMe, iPhone 3.0, Android, Android Gmail, Palm Pre (WebOS), Palm Treo (Win Mobile 6.5)]
+  float:
+      unsupported_in: [Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 8, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, Gmail, MySpace, AOL Web, MobileMe, iPhone 3.0, Palm Pre (WebOS), Palm Treo (Win Mobile 6.5), Palm Treo (Palm Garnet OS)]
+  left:
+      unsupported_in: [Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 8, AOL 10, Thunderbird 2, AOL Web, MobileMe, iPhone 3.0, Android, Palm Pre (WebOS)]
+  opacity:
+      unsupported_in: [Apple Mail, Entourage 2008, AOL 10, Thunderbird 2, MySpace, AOL Web, MobileMe, iPhone 3.0, Palm Pre (WebOS)]
+  overflow:
+      unsupported_in: [Outlook 2003, Windows Mail, Apple Mail, Entourage 2008, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, Gmail, AOL Web, MobileMe, Palm Pre (WebOS), Palm Treo (Palm Garnet OS)]
+  position:
+      unsupported_in: [Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 8, AOL 10, Thunderbird 2, AOL Web, MobileMe, iPhone 3.0, Android, Palm Pre (WebOS)]
+  right:
+      unsupported_in: [Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 8, AOL 10, Thunderbird 2, AOL Web, MobileMe, iPhone 3.0, Android, Palm Pre (WebOS)]
+  top:
+      unsupported_in: [Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 8, AOL 10, Thunderbird 2, AOL Web, MobileMe, iPhone 3.0, Android, Palm Pre (WebOS)]
+  visibility:
+      unsupported_in: [Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, MySpace, AOL Web, MobileMe, iPhone 3.0, Android, Palm Pre (WebOS), Palm Treo (Win Mobile 6.5)]
+  z-index:
+      unsupported_in: [Outlook 2007, Outlook 2003, Windows Mail, Apple Mail, Entourage 2008, Notes 8, AOL 10, Thunderbird 2, AOL Web, MobileMe, iPhone 3.0, Android, Palm Pre (WebOS)]
+  list-style-image:
+      unsupported_in: [Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, MySpace, AOL Web, MobileMe, iPhone 3.0, Android Gmail, Palm Pre (WebOS), Palm Treo (Win Mobile 6.5), Blackberry]
+  list-style-position:
+      unsupported_in: [Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, Gmail, MySpace, AOL Web, MobileMe, iPhone 3.0, Android, Android Gmail, Palm Pre (WebOS), Palm Treo (Win Mobile 6.5)]
+  list-style-type:
+      unsupported_in: [Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 6 and 7, Notes 8, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, Gmail, MySpace, AOL Web, MobileMe, iPhone 3.0, Palm Pre (WebOS), Palm Treo (Win Mobile 6.5), Palm Treo (Palm Garnet OS)]
+  border-collapse:
+      unsupported_in: [Outlook 2007, Outlook 2003, Windows Mail, Apple Mail, Entourage 2008, Notes 6 and 7, Notes 8, AOL 10, Thunderbird 2, Yahoo! Mail, Hotmail, Gmail, MySpace, AOL Web, MobileMe, iPhone 3.0, Android, Android Gmail, Palm Pre (WebOS), Palm Treo (Win Mobile 6.5), Palm Treo (Palm Garnet OS), Blackberry]
+  border-spacing:
+      unsupported_in: [Apple Mail, Entourage 2008, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Gmail, MySpace, AOL Web, MobileMe, iPhone 3.0, Android, Android Gmail, Palm Pre (WebOS), Palm Treo (Palm Garnet OS), Blackberry]
+  caption-side:
+      unsupported_in: [Thunderbird 2, Hotmail, Gmail, MobileMe]
+  empty-cells:
+      unsupported_in: [Apple Mail, Entourage 2008, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, Gmail, MySpace, AOL Web, MobileMe, iPhone 3.0, Android, Android Gmail, Palm Pre (WebOS)]
+  table-layout:
+      unsupported_in: [Outlook 2007, Outlook 2003, Windows Mail, Apple Mail, Entourage 2004, Entourage 2008, Notes 8, AOL 10, Thunderbird 2, Yahoo! Mail, Yahoo! Classic, Hotmail, Gmail, AOL Web, MobileMe, iPhone 3.0, Android, Android Gmail, Palm Pre (WebOS), Palm Treo (Win Mobile 6.5), Blackberry]
