@@ -1,0 +1,4 @@
+public/_out/*.html
+public/_out/*.txt
+tmp
+logs/*

@@ -1,0 +1,121 @@
+.body { clear: left; }
+
+
+
+.thanks { margin-left: -261px; width: 220px; }
+
+
+
+table {
+	border-collapse: collapse;
+	margin: 15px 10px;
+	width: 600px;
+	
+}
+
+th, td {
+	padding: 6px 15px;
+	font-size: 11px;
+}
+
+
+th {
+	font-weight: bold;
+	background-color: #555;
+	color: #fff;
+}
+
+
+.poor td {
+	background-color: #777;
+	color: #fff;
+}
+
+.risky td {
+	background-color: #ccc;
+	color: #222;
+	
+}
+
+
+.safe td {
+	background-color: #eaeaea;
+	color: #333;
+}
+
+form {
+	margin: 20px 0;
+}
+
+
+label, form .button {
+	margin-top: 20px;
+	display: block;
+	padding-bottom: 5px;
+}
+
+input, .hint {
+	display: block;
+	margin-left: 20px;
+	font-size: 11px;
+	padding: 2px 5px;
+}
+
+input[type=hidden] {
+	display: none;
+}
+
+input[type=text] {
+	width: 400px;
+}
+
+label {
+	font: normal 115% "Georgia",serif;
+	color: #444;
+}
+
+label.toggle {
+	cursor: pointer;
+}
+
+label.toggle:hover { color: #000; }
+
+
+.code dt {
+	font: normal 13px monospace;
+	color: #555;
+}
+
+.code dd {
+	font-size: 12px;
+	margin-left: 15px;
+}
+
+/*.code dd {
+	font: normal 11px monospace;
+}
+
+*/
+/* TODO: move to /inc/code.css */
+
+code .keywords, code .brackets  { color: #333; }
+code .global { color: #000; }
+code .comment { color: #6a6a6a; }
+code .string { color: #527c93; }
+
+
+textarea.premailer_output {
+	width: 100%;
+	height: 80px;
+	font: normal 11px/14px monospace;
+}
+
+
+textarea#html {
+	margin-left: 20px;
+	width: 590px;
+	height: 200px;
+	padding: 5px;
+	font: normal 11px/14px monospace;
+}
+

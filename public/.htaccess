@@ -5,6 +5,7 @@ header append X-Robots-Tag "noarchive"
 </Files>
 
 AddCharset UTF-8 .txt
+AddCharset UTF-8 .html
 
 SetEnv GEM_HOME /home/dialect/.gems
 SetEnv GEM_PATH /home/dialect/.gems:/usr/lib/ruby/gems/1.8

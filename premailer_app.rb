@@ -1,7 +1,8 @@
 # premailer_app.rb
-# ENV["GEM_PATH"] = "/home/dialect/.gems:/home/dialect/.gem:/usr/lib/ruby/gems/1.8"
-require 'rubygems'
+ENV["GEM_PATH"] = "/home/dialect/.gems:/home/dialect/.gem:/usr/lib/ruby/gems/1.8"
+
 require 'builder'
+require 'rubygems'
 require 'logger'
 require 'sinatra'
 require 'erb'
@@ -11,13 +12,23 @@ require 'premailer'
 
 @url = ''
 
-class MyCustomError < Sinatra::ServerError; end
+ error do
+    'Sorry there was a nasty error - ' + env['sinatra.error'].name
+  end
 
-error MyCustomError do
-  status 500
-  @message = request.env['sinatra.error'].message
-  erb :error
-end
+  not_found do
+    @message = 'This is nowhere to be found'
+    erb :error
+  end
+
+
+#class MyCustomError < Sinatra::ServerError; end
+
+#error MyCustomError do
+#  status 500
+#  @message = request.env['sinatra.error'].message
+#  erb :error
+#end
 
 get '/' do
   @initial_doc = 'http://' + @env['HTTP_HOST'] + '/tests/base.html'
@@ -131,6 +142,7 @@ def process_url(url, opts = {})
   output = {}
 
   begin
+    $stderr.puts "Processing #{url} with opts #{@options.inspect}"
     output_base_url = 'http://' + @env['HTTP_HOST'] + '/_out/'
     
     premailer = Premailer.new(url, @options)
