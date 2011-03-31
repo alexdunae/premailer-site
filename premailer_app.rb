@@ -1,34 +1,47 @@
-# premailer_app.rb
-ENV["GEM_PATH"] = "/home/dialect/.gems:/home/dialect/.gem:/usr/lib/ruby/gems/1.8"
-
-require 'builder'
-require 'rubygems'
-require 'logger'
+$: << File.join(File.dirname(__FILE__), 'lib')
 require 'sinatra'
-require 'erb'
+require "sinatra/reloader" if development?
+require 'haml'
+require 'nokogiri'
+require 'builder'
 require 'json'
 require 'digest'
+require 'datamapper'
+require 'dm-migrations'
+require 'dm-sqlite-adapter' if development?
+#require 'dm-postgres-adapter' if production?
 require 'premailer'
+require 'aws/s3'
+
+
+# DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite3://premailer.db')
+# 
+# class Action
+#   include DataMapper::Resource
+#   
+#   property :id,        Serial
+#   property :name,      String
+#   property :source,    String
+#   property :url,       String
+#   property :body,      Text      
+#   property :options,   String
+#   property :created_at, DateTime
+# end
+# DataMapper.finalize
+# Action.auto_migrate!
+#
 
 @url = ''
+AWS_BUCKET = 'premailer'
 
- error do
-    'Sorry there was a nasty error - ' + env['sinatra.error'].name
-  end
+error do
+  'Sorry there was a nasty error - ' + env['sinatra.error'].name
+end
 
-  not_found do
-    @message = 'This is nowhere to be found'
-    erb :error
-  end
-
-
-#class MyCustomError < Sinatra::ServerError; end
-
-#error MyCustomError do
-#  status 500
-#  @message = request.env['sinatra.error'].message
-#  erb :error
-#end
+not_found do
+  @message = 'This is nowhere to be found'
+  erb :error
+end
 
 get '/' do
   @initial_doc = 'http://' + @env['HTTP_HOST'] + '/tests/base.html'
@@ -41,39 +54,8 @@ get '/' do
 end
 
 post '/' do
-  do_request
-end
-
-get '/feedback' do
-  erb :feedback
-end
-
-def do_request
-  @source_description = ''
-  @url = ''  
-
-  if params[:content_source] == 'html' and not params[:html].empty?
-    @url = save_html_to_file(params[:html])
-    @source_description = 'your HTML content'
-  elsif not params[:url].empty?
-    @url = params[:url]
-    @source_description = @url
-  else
-    @message = 'No input file specified'
-    @analytics_page = '/error/no_input'
-    erb :error
-  end
-
-  opts = {}
-
-  if params[:querystring]
-    opts[:link_query_string] = params[:querystring].strip
-  end
+  res = do_request
   
-  res = process_url(@url, opts)
-
-  @results = res
-
   if res[:status] == 201
     @analytics_page = '/success'
     erb :results
@@ -82,6 +64,85 @@ def do_request
     @analytics_page = '/error/processing'
     erb :error
   end
+  
+end
+
+post '/api' do
+  res = do_request
+  output = {
+    :status => res[:status], 
+    :message => res[:message],
+    :warnings => nil,
+    :output => {
+      :html => res[:output][:html_file],
+      :txt => res[:output][:txt_file],
+    }
+  }
+
+  if output[:status] == 500
+    status 500
+  else
+    status 201
+  end
+
+  body(output.to_json)
+end
+
+get '/feedback' do
+  erb :feedback
+end
+
+def do_request
+  @source_description = ''
+  @html = ''  
+
+  @opts = {}
+
+  if params[:content_source] == 'html' and not params[:html].empty?
+    @opts[:with_html_string] = true
+    html = params[:html]
+    @source_description = 'your HTML content'
+  elsif not params[:url].empty?
+    html = params[:url]
+    @source_description = html
+  else
+    @message = 'No input file specified'
+    @analytics_page = '/error/no_input'
+    erb :error
+  end
+
+  if params[:querystring]
+    @opts[:link_query_string] = params[:querystring].strip
+  end
+  
+  if params[:preserve_styles] and params[:preserve_styles] == 'yes'
+    @opts[:preserve_styles] = true
+  end
+
+  if params[:remove_ids] and params[:remove_ids] == 'yes'
+    @opts[:remove_ids] = true
+  end
+
+  if params[:remove_classes] and params[:remove_classes] == 'yes'
+    @opts[:remove_classes] = true
+  end
+  
+  if params[:remove_comments] and params[:remove_comments] == 'yes'
+    @opts[:remove_comments] = true
+  end
+
+  res = process_url(html, @opts)
+
+  # @post = Action.create(
+  #   :name      => 'premailer',
+  #   :source    => 'form',
+  #   :url       => params[:url],
+  #   :body      => params[:html],
+  #   :options   => opts
+  # )
+
+  @results = res
+  @results
 end
 
 def exit_with_error(code, message)
@@ -102,28 +163,6 @@ def exit_with_error(code, message)
   finish(res)
 end
 
-def api_output(data = {})
-  output = {:status => 200, 
-   :message => '',
-   :url => @url,
-   :options => nil,
-   :warnings => nil,
-   :output => nil,
-   :request_id => nil
-  }.merge(data)
-
-
-  if output[:status] == 201
-    status 201
-  elsif output[:status] == 500
-    status 500
-  else
-    status 200
-  end
-
-  body(output.to_json)
-end
-
 
 
 def is_valid_api_key?(api_key)
@@ -133,7 +172,9 @@ end
 def process_url(url, opts = {}) 
   @options = {:warn_level => Premailer::Warnings::SAFE,
               :text_line_length => 65, 
-              :link_query_string => nil
+              :link_query_string => nil,
+              :verbose => true,
+              :adapter => :nokogiri
               }.merge(opts)
 
   return_status = 201
@@ -151,21 +192,26 @@ def process_url(url, opts = {})
     out_plaintext = premailer.to_plain_text
     out_html = premailer.to_inline_css
 
-    ftxt = File.open('public/_out/' + outfile + '.txt', "w+")               # write the output file
-    ftxt.write(premailer.to_plain_text)
-    ftxt.close  
+    AWS::S3::Base.establish_connection!(
+      :access_key_id     => 'AKIAJGV6CM4KYKPTRSHA',
+      :secret_access_key => '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'
+    )
 
-    fout = File.open('public/_out/' + outfile + '.html', "w")              # write the output file
-    fout.write(premailer.to_inline_css)
-    fout.close
+    AWS::S3::S3Object.store("#{outfile}.txt", premailer.to_plain_text, AWS_BUCKET, :content_type => 'text/plain; charset=utf-8', :access => :authenticated_read)
+    AWS::S3::S3Object.store("#{outfile}.html", premailer.to_inline_css, AWS_BUCKET, :content_type => 'text/html; charset=utf-8', :access => :authenticated_read)
+
+    # keep the URLs up for two hours
+    ftxt = AWS::S3::S3Object.url_for(outfile + '.txt', AWS_BUCKET, :use_ssl => true, :expires_in => 7200)
+    fhtml = AWS::S3::S3Object.url_for(outfile + '.html', AWS_BUCKET, :use_ssl => true, :expires_in => 7200)
 
     warnings = premailer.warnings
     output = {
-        :html_file => "#{output_base_url}#{outfile}.html",
-        :txt_file  => "#{output_base_url}#{outfile}.txt",
+        :html_file => fhtml,
+        :txt_file  => ftxt,
         :html => out_html,
         :txt => out_plaintext
-      }
+    }
+
   rescue OpenURI::HTTPError => e
     return_status = 500
     message = 'Source file not found'
@@ -184,15 +230,6 @@ def process_url(url, opts = {})
    :warnings => warnings,
    :output => output
   }
-end
-
-def save_html_to_file(html)
-  fpath = 'tmp/' +  Digest::MD5.hexdigest(html) + '.html'
-  fout = File.open(fpath, "w")
-  fout.write(html)
-  fout.close
-  
-  return fpath
 end
 
 def generate_request_id(url)

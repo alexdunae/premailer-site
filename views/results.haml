@@ -1,0 +1,66 @@
+%h1 Premailer Results
+%div.body
+%p
+  We&rsquo;ve processed 
+  = @source_description
+  , and
+    
+%ul
+  %li made all your CSS inline,
+  %li changed relative links to absolute links,
+  <% unless @results[:options][:link_query_string].nil? or @results[:options][:link_query_string].empty? %>%li appended <tt>?<%= @results[:options][:link_query_string] %></tt> to your links,<% end %>
+  %li moved any CSS pseudo-classes (like <tt>:hover</tt>) to the <tt>&lt;head&gt;</tt>,
+  %li checked your HTML and CSS for compatibility with e-mail programs, and
+  %li created a plain-text version of your message
+  %li=  @results[:options].inspect
+
+
+%div.thanks.meta
+  Time for some testing?
+  %br Campaign Monitor offers a thorough
+  %br 
+    %a{:href=>"http://www.campaignmonitor.com/testing/"} e-mail client testing service.
+
+%h2
+  %a{:href=> @results[:output][:html_file]} Click to View the HTML results
+
+%textarea.premailer_output#html_output{:cols=>80, :rows=>5}= @results[:output][:html].to_xs
+
+
+
+
+%h2
+  %a{:href=> @results[:output][:txt_file]} Click to View the HTML results
+
+%textarea.premailer_output#txt_output{:cols=>80, :rows=>5}= @results[:output][:txt]
+
+:javascript
+  try {
+    pageTracker._trackEvent("Premailer", "Processed");
+  } catch(err) {} 
+
+%div.meta.thanks
+  Results not what you expected?  You can 
+  %a{:href=>"https://github.com/alexdunae/premailer/issues"} create a bug report on GitHub.
+  Be sure to include the URL that caused the problems.
+
+- if @results[:warnings] and @results[:warnings].length > 0
+  %h2 HTML and CSS warnings
+
+  %p 
+    Warnings are generated from several sources, including the 
+    %a{:href=>"http://www.email-standards.org/"} Email Standards Project&rsquo;s guides.
+
+    %table.warnings#premailer-warnings
+
+      %thead
+        %tr
+          %th Property
+          %th Support
+          %th Unsupported clients
+      %tbody
+        - @results[:warnings].each do |w|
+          %tr{:class=>w[:level].downcase}
+            %td.property= w[:message]
+            %td.level= w[:level].capitalize
+            %td= w[:clients]

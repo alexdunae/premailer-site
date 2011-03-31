@@ -1,15 +1,18 @@
 .body { clear: left; }
 
 
+.thanks {
+	font-style: italic;
+	padding: 20px 40px;
+	text-align: center;
+}
 
-.thanks { margin-left: -261px; width: 220px; }
-
-
+.thanks a { text-decoration: underline;}
 
 table {
 	border-collapse: collapse;
-	margin: 15px 10px;
-	width: 600px;
+	margin: 20px auto;
+	width: 100%;
 	
 }
 
@@ -119,3 +122,11 @@ textarea#html {
 	font: normal 11px/14px monospace;
 }
 
+
+li { margin-bottom: 0;}
+
+h2 a { font-style: normal;}
+
+.checkboxes { margin: 10px 0;}
+.checkboxes label, .checkboxes input { display: inline; }
+.checkboxes label { padding: 0 20px 0 0; line-height: 40px;}

@@ -1,4 +1,4 @@
-    <h1><a name="title">Premailer Results</a></h1>
+    <h1>Premailer Results</h1>
     <div class="body">
     <p>We&rsquo;ve processed <%= @source_description %>, and</p>
     
@@ -7,18 +7,22 @@
       <li>changed relative links to absolute links,</li>
       <% unless @results[:options][:link_query_string].nil? or @results[:options][:link_query_string].empty? %><li>appended <tt>?<%= @results[:options][:link_query_string] %></tt> to your links,</li><% end %>
       <li>moved any CSS pseudo-classes (like <tt>:hover</tt>) to the <tt>&lt;head&gt;</tt>,</li>
-      <li>checked your HTML and CSS for compatibiliy with e-mail programs, and</li>
+      <% if @results[:options][:remove_ids] %><li>removed unused IDs,</li><% end %>
+      <% if @results[:options][:remove_classes] %><li>removed classes,</li><% end %>
+      <% if @results[:options][:remove_classes] %><li>removed comments,</li><% end %>
+      <% if @results[:options][:remove_classes] %><li>left &lt;link&gt; and &lt;style&gt; tags in the &lt;head&gt;,</li><% end %>
+      <li>checked your HTML and CSS for compatibility with e-mail programs, and</li>
       <li>created a plain-text version of your message</li>
    </ul>
 
-    <div class="thanks meta">Time for some testing?<br>Campaign Monitor offers a thorough<br><a href="http://www.campaignmonitor.com/testing/">e-mail client testing service</a>.</div>
+    <div class="thanks meta"><a href="http://www.campaignmonitor.com/testing/">Time for some testing?<br>Campaign Monitor offers a thorough<br>e-mail client testing service</a>.</div>
 
 
-    <p>&#x00bb; <a href="<%= @results[:output][:html_file] %>" title="Contents of <%= @url %> with inline CSS">View the HTML results</a></p>
+    <h2><a href="<%= @results[:output][:html_file] %>" title="Contents of <%= @url %> with inline CSS">Click to View the HTML results</a></h2>
 
     <textarea cols="80" rows="5" id="html_output" class="premailer_output"><%= @results[:output][:html].to_xs %></textarea>
 
-    <p>&#x00bb; <a href="<%= @results[:output][:txt_file] %>" title="Contents of <%= @url %> converted to plain text">View the plain-text results</a></p>
+    <h2><a href="<%= @results[:output][:txt_file] %>" title="Contents of <%= @url %> converted to plain text">Click to View the plain-text results</a></h2>
 
     <textarea cols="80" rows="5" id="txt_output" class="premailer_output"><%= @results[:output][:txt] %></textarea>
 
@@ -29,10 +33,10 @@
 
     } catch(err) {} 
     </script>
-    
+    <div class="meta thanks">Results not what you expected?  You can <a href="https://github.com/alexdunae/premailer/issues">create a bug report on GitHub</a>.  Be sure to include the URL that caused the problems.</div>
 <% if @results[:warnings] %>
 <br>
-  <h3>HTML and CSS warnings</h3>
+  <h2>HTML and CSS warnings</h2>
 
   <% if @results[:warnings].length > 0 %>
 
@@ -61,4 +65,3 @@
 <p>None.</p>
 <% end %>
 <% end %>
-</div>
