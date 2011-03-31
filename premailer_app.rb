@@ -44,7 +44,7 @@ not_found do
 end
 
 get '/' do
-  @initial_doc = 'http://' + @env['HTTP_HOST'] + '/tests/base.html'
+  @initial_doc = 'http://dialect.ca/premailer-tests/base.html'
 
   if not params[:bookmarklet].nil?
     do_request
