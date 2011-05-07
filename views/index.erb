@@ -6,37 +6,52 @@
 
 
     <form method="post" action="/" id="premailer_form">
-    <input type="hidden" name="content_source" id="content_source" value="url">
-    <label class="toggle" for="url" id="process_url_label">&#x00bb; Use a URL as the source</label>
+      <div class="field text">
+        <label class="toggle" id="process_url_label">Use a URL as the source
+          <p class="sublabel">Don&rsquo;t forget http://.</p>
+        </label>
+        
+        <span id="process_url">
+          <input type="hidden" name="content_source" id="content_source" value="url">
+          <input type="text" class='text' id="url" name="url" value="<%= @initial_doc %>">
+        </span>
+      </div>
 
-    <div id="process_url">
-      <span class="hint">Don&rsquo;t forget http://.</span>
-      <input type="text" id="url" name="url" value="<%= @initial_doc %>">
+
+      <div class="field textarea">
+        <label class="toggle" id="process_html_label">Paste HTML as the source
+          <pspan class="sublabel">Make sure you use absolute URLs.</p>
+        </label>
+        
+        <span id="process_html">
+          <input type="hidden" name="content_source" id="content_source" value="html">
+          <textarea id="html" name="html" cols="20" rows="5"></textarea>
+        </span>
+      </div>
+
+
+
+
+    <div class="field optional text">
+      <label for="querystring">Query string to append to links
+        <span class="sublabel">Useful for adding tracking codes.</span>
+        </label>
+      <input type="text" id="querystring" name="querystring" class="text" value="">
+      
     </div>
 
-
-    <label class="toggle" for="html" id="process_html_label">&#x00bb; Use HTML as the source</label>
-    <div id="process_html">
-      <span class="hint">Note: make sure you use absolute URLs for all your links</span>
-      <textarea id="html" name="html" cols="20" rows="5"></textarea>
+    <div class="optional field ">
+      <label>Options</label>
+      <div class="checkboxes">
+        <label class="check"><input type="checkbox" id="remove_classes" name="remove_classes" value="yes"> Remove classes</label>
+        <label class="check"><input type="checkbox" id="remove_ids" name="remove_ids" value="yes"> Remove unused IDs</label>
+        <label class="check"><input type="checkbox" id="remove_comments" name="remove_comments" value="yes"> Remove comments</label><br>
+        <label class="check"><input type="checkbox" id="preserve_styles" name="preserve_styles" value="yes"> Don’t remove &lt;style&gt; and &lt;link&gt; elements</label>
+      </div>
     </div>
 
-    <div class="optional">
-      <label for="querystring">Query string to append to links</label>
-      <input type="text" id="querystring" name="querystring" value="">
-      <span class="hint">Optional, but useful for adding tracking codes.  Do not include the '?'.<br>
-      e.g. <tt>utm_source=newsletter&amp;utm_medium=email&amp;utm_campaign=spring-sale</tt></span>
-    </div>
-
-    <div class="optional checkboxes">
-      <label><input type="checkbox" id="remove_classes" name="remove_classes" value="yes"> Remove classes</label>
-      <label><input type="checkbox" id="remove_ids" name="remove_ids" value="yes"> Remove unused IDs</label>
-      <label><input type="checkbox" id="remove_comments" name="remove_comments" value="yes"> Remove comments</label><br>
-      <label><input type="checkbox" id="preserve_styles" name="preserve_styles" value="yes"> Leave &lt;style&gt; and &lt;link&gt; elements in the &lt;head&gt;</label>
-    </div>
-
-    <div class="button">
-      <input type="submit" value="Do it to it!">
+    <div class="field button">
+        <button type="submit" class="submit">Submit</button>
     </div>
     </form>
 
@@ -47,7 +62,7 @@
 
 
   <div id="about-premailer">
-  <h2>What is this?</h2>
+  <h2><span>What is this?</span></h2>
 
   <p>For the best HTML e-mail delivery results, CSS should be inline.  This is a huge pain and a simple newsletter becomes un-managable very quickly.  This script is our solution.</p>
 
@@ -73,14 +88,14 @@
   </ul>
 
 
-  <h2>Bookmarklet</h2>
+  <h2><span>Bookmarklet</span></h2>
   
   <p>If you&rsquo;re using Firefox 3+, you can use a bookmarklet as a shortcut to processing pages.</p>
   
   <p>To install, drag this link up to your toolbar: <a style="background: #eee none; padding: 2px 4px; border: 1px solid #ccc;" title="Make CSS inline with Premailer" href="javascript:(function(){document.body.appendChild(document.createElement('script')).src='http://premailer.dialect.ca/inc/bookmarklet-1.0.js';})();">Premailer</a></p>
 
 
-  <h2>Under the hood</h2>
+  <h2><span>Under the hood</span></h2>
 
   <p>The current version, <%= Premailer::VERSION %>, has a new home and active development has resumed.  Please update your bookmarks to <a href="http://premailer.dialect.ca/">http://premailer.dialect.ca/</a>.
   

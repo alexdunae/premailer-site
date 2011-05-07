@@ -45,7 +45,7 @@ th {
 	background-color: #eaeaea;
 	color: #333;
 }
-
+/*
 form {
 	margin: 20px 0;
 }
@@ -77,11 +77,13 @@ label {
 	color: #444;
 }
 
+
+label.toggle:hover { color: #000; }
+*/
+
 label.toggle {
 	cursor: pointer;
 }
-
-label.toggle:hover { color: #000; }
 
 
 .code dt {
@@ -122,11 +124,13 @@ textarea#html {
 	font: normal 11px/14px monospace;
 }
 
-
+/*
 li { margin-bottom: 0;}
 
 h2 a { font-style: normal;}
+*/
+form .checkboxes { float: left; width: 378px;}
+/*.checkboxes label.check, .checkboxes input { display: block; }*/
+.checkboxes label.check { padding: 0 20px 0 0; line-height: 20px; font-size: 12px; margin-right: 0;}
 
-.checkboxes { margin: 10px 0;}
-.checkboxes label, .checkboxes input { display: inline; }
-.checkboxes label { padding: 0 20px 0 0; line-height: 40px;}
+
