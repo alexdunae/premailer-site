@@ -18,7 +18,7 @@
     <div class="thanks meta"><a href="http://www.campaignmonitor.com/testing/">Time for some testing?<br>Campaign Monitor offers a thorough<br>e-mail client testing service</a>.</div>
 
 
-    <h2><a href="<%= @results[:output][:html_file] %>" title="Contents of <%= @url %> with inline CSS">Click to View the HTML results</a></h2>
+    <h2><span><a href="<%= @results[:output][:html_file] %>" title="Contents of <%= @url %> with inline CSS">Click to View the HTML results</a></span></h2>
 
     <textarea cols="80" rows="5" id="html_output" class="premailer_output"><%= @results[:output][:html].to_xs %></textarea>
 
@@ -36,7 +36,7 @@
     <div class="meta thanks">Results not what you expected?  You can <a href="https://github.com/alexdunae/premailer/issues">create a bug report on GitHub</a>.  Be sure to include the URL that caused the problems.</div>
 <% if @results[:warnings] %>
 <br>
-  <h2>HTML and CSS warnings</h2>
+  <h2><span>HTML and CSS warnings</span></h2>
 
   <% if @results[:warnings].length > 0 %>
 
