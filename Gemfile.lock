@@ -58,6 +58,7 @@ GEM
       data_objects (= 0.10.6)
     fastercsv (1.5.4)
     haml (3.1.2)
+    hpricot (0.8.4)
     htmlentities (4.3.0)
     json (1.4.6)
     mime-types (1.16)
@@ -96,6 +97,7 @@ DEPENDENCIES
   dm-migrations
   dm-sqlite-adapter
   haml
+  hpricot
   htmlentities
   nokogiri
   premailer

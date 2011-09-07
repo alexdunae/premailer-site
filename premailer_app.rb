@@ -3,6 +3,7 @@ require 'sinatra'
 require "sinatra/reloader" if development?
 require 'haml'
 require 'nokogiri'
+require 'hpricot'
 require 'builder'
 require 'json'
 require 'digest'
