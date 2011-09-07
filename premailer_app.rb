@@ -116,6 +116,7 @@ post '/api/0.1/documents' do
     status 500
   else
     response.header['Location'] = result[:output][:html_file]
+    expires 7200, :private
     status 201
   end
 

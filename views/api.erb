@@ -95,7 +95,9 @@
 
 <p>Premailer serves the response as JSON data with the <tt>application/json</tt> mime type encoded as <tt>UTF-8</tt>.</p>
 
-<p>The response includes links to the generated HTML and plain text files.  The URL of the resulting HTML file is also set in the <tt>Location: </tt> header.  These links are valid for two hours.</p>
+<p>The result will have a status code of 201, 400, 403 or 500.</p>
+
+<p>The response includes links to the generated HTML and plain text files.  The URL of the resulting HTML file is also set in the <tt>Location: </tt> header.  These links are valid for two hours (specified in the <tt>Expires</tt> header).</p>
 
 <table summary="Premailer API response fields">
 <caption>Response fields</caption>
@@ -159,7 +161,13 @@
 </table>
 
 <h3>Example of a Premailer JSON response</h3>
-<pre><code class="javascript">
+<pre><code>
+HTTP/1.1 201 Created
+Content-Type: application/json;charset=utf-8
+Location: https://s3.amazonaws.com/premailer/aaaa.html?params
+Cache-Control: private, max-age=7200
+Expires: Wed, 07 Sep 2011 23:15:04 GMT
+
   {
       "version": "0.1",
       "status": 201,
