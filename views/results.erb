@@ -20,7 +20,7 @@
 
     <h2><span><a href="<%= @results[:output][:html_file] %>" title="Contents of <%= @url %> with inline CSS">Click to View the HTML results</a></span></h2>
 
-    <textarea cols="80" rows="5" id="html_output" class="premailer_output"><%= @results[:output][:html].to_xs %></textarea>
+    <textarea cols="80" rows="5" id="html_output" class="premailer_output"><%= HTMLEntities.new.encode(@results[:output][:html]) %></textarea>
 
     <h2><a href="<%= @results[:output][:txt_file] %>" title="Contents of <%= @url %> converted to plain text">Click to View the plain-text results</a></h2>
 

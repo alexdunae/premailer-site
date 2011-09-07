@@ -3,3 +3,4 @@ public/_out/*.txt
 tmp
 logs/*
 .DS_Store
+.bundle

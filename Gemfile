@@ -6,6 +6,7 @@ gem 'premailer'
 gem 'datamapper'
 gem 'dm-migrations'
 gem 'nokogiri'
+gem 'htmlentities'
 gem 'aws-s3', :require => 'aws/s3'
 
 group :development, :test do

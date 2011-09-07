@@ -6,6 +6,7 @@ require 'nokogiri'
 require 'builder'
 require 'json'
 require 'digest'
+require 'htmlentities'
 require 'datamapper'
 require 'dm-migrations'
 require 'dm-sqlite-adapter' if development?
