@@ -67,21 +67,53 @@ post '/' do
   
 end
 
-post '/api' do
-  res = do_request
+get '/api' do
+  erb :api
+end
+
+post '/api/0.1/documents' do
+  set :show_exceptions, false
+  content_type 'application/json', :charset => 'utf-8'
+  opts = {}
+  source = nil
+
+  if params[:html] and not params[:html].empty?
+    opts[:with_html_string] = true
+    source = params[:html]
+  elsif params[:url] and not params[:url].empty?
+    source = params[:url]
+  else
+    return 400, [{:message => 'No input file specified', :version => '0.1', :status => 400}.to_json]
+  end
+
+  opts[:adapter] = (params[:adapter] and params[:adapter] == 'nokogiri') ? :nokogiri : :hpricot
+  opts[:base_url] = params[:base_url].strip if params[:base_url]
+  opts[:line_length] = params[:line_length].strip.to_i if params[:line_length]
+  opts[:link_query_string] = params[:link_query_string].strip if params[:link_query_string]
+  opts[:preserve_styles] = (params[:preserve_styles] and params[:preserve_styles] == 'false') ? false : true
+  opts[:remove_ids] = (params[:remove_ids] and params[:remove_ids] == 'true') ? true : false
+  opts[:remove_classes] = (params[:remove_classes] and params[:remove_classes] == 'true') ? true : false
+  opts[:remove_comments] = (params[:remove_comments] and params[:remove_comments] == 'true') ? true : false
+
+  result = process_url(source, opts.merge({:io_exceptions => false}))
+
   output = {
-    :status => res[:status], 
-    :message => res[:message],
-    :warnings => nil,
-    :output => {
-      :html => res[:output][:html_file],
-      :txt => res[:output][:txt_file],
+    :version => '0.1',
+    :status => result[:status].to_i, 
+    :message => result[:message],
+    :options => opts,
+    :documents => {
+      :html => result[:output][:html_file],
+      :txt => result[:output][:txt_file],
     }
   }
+
+  
 
   if output[:status] == 500
     status 500
   else
+    response.header['Location'] = result[:output][:html_file]
     status 201
   end
 
@@ -144,25 +176,6 @@ def do_request
   @results = res
   @results
 end
-
-def exit_with_error(code, message)
-  unless message.nil?
-    response['X-Premailer-Message'] = message
-  end
-
-  res = {'status' => code,
-         'message' => message,
-         'url' => @url,
-         'output' => nil,
-         'request_id' => nil
-        }.to_json
-  
-  body res
-  status code.to_i
-
-  finish(res)
-end
-
 
 
 def is_valid_api_key?(api_key)
