@@ -52,5 +52,5 @@ if (premailer_is_local()) {
 } else {
 	var dest = 'http://premailer.dialect.ca/?bookmarklet=true&url=';
 	var tracking = '&utm_source=remote_bookmarklet&utm_medium=bookmarklet&utm_campaign=Tools';
-	document.location.assign(dest + encodeURIComponent(document.location) + tracking);
+	window.location = dest + encodeURIComponent(document.URL) + tracking;
 }
