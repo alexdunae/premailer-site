@@ -2,7 +2,7 @@ source :gemcutter
 gem 'sinatra', '>= 1.0'
 gem 'haml'
 gem 'builder'
-gem 'premailer'
+gem 'premailer', :git => 'git://github.com/alexdunae/premailer.git'
 gem 'datamapper'
 gem 'dm-migrations'
 gem 'nokogiri'
