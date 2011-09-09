@@ -13,6 +13,7 @@
       <% if @results[:options][:remove_classes] %><li>left &lt;link&gt; and &lt;style&gt; tags in the &lt;head&gt;,</li><% end %>
       <li>checked your HTML and CSS for compatibility with e-mail programs, and</li>
       <li>created a plain-text version of your message</li>
+      <% if @results[:options][:adapter] == :nokogiri %><li>using the Nokogiri parser.</li><% end %>
    </ul>
 
     <div class="thanks meta"><a href="http://www.campaignmonitor.com/testing/">Time for some testing?<br>Campaign Monitor offers a thorough<br>e-mail client testing service</a>.</div>

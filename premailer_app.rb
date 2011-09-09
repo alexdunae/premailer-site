@@ -50,6 +50,7 @@ get '/' do
 
   if not params[:bookmarklet].nil?
     do_request
+    erb :results
   else
     erb :index
   end
@@ -165,6 +166,11 @@ def do_request
   if params[:remove_comments] and params[:remove_comments] == 'yes'
     @opts[:remove_comments] = true
   end
+
+  if params[:adapter] and params[:adapter] == 'nokogiri'
+    @opts[:adapter] = :nokogiri
+  end
+
 
   res = process_url(html, @opts)
 
