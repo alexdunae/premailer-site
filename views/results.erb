@@ -6,7 +6,7 @@
       <li>made all your CSS inline,</li>
       <li>changed relative links to absolute links,</li>
       <% unless @results[:options][:link_query_string].nil? or @results[:options][:link_query_string].empty? %><li>appended <tt>?<%= @results[:options][:link_query_string] %></tt> to your links,</li><% end %>
-      <li>moved any CSS pseudo-classes (like <tt>:hover</tt>) to the <tt>&lt;head&gt;</tt>,</li>
+      <li>moved any CSS pseudo-classes (like <tt>:hover</tt>) to the <tt>&lt;body&gt;</tt>,</li>
       <% if @results[:options][:remove_ids] %><li>removed unused IDs,</li><% end %>
       <% if @results[:options][:remove_classes] %><li>removed classes,</li><% end %>
       <% if @results[:options][:remove_classes] %><li>removed comments,</li><% end %>
@@ -23,7 +23,7 @@
 
     <textarea cols="80" rows="5" id="html_output" class="premailer_output"><%= HTMLEntities.new.encode(@results[:output][:html]) %></textarea>
 
-    <h2><a href="<%= @results[:output][:txt_file] %>" title="Contents of <%= @url %> converted to plain text">Click to View the plain-text results</a></h2>
+    <h2><span><a href="<%= @results[:output][:txt_file] %>" title="Contents of <%= @url %> converted to plain text">Click to View the plain-text results</a></span></h2>
 
     <textarea cols="80" rows="5" id="txt_output" class="premailer_output"><%= @results[:output][:txt] %></textarea>
 
