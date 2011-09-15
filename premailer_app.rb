@@ -171,6 +171,7 @@ def do_request
     @opts[:adapter] = :nokogiri
   end
 
+  $stderr.puts "- sending opts #{@opts.inspect}"
 
   res = process_url(html, @opts)
 
@@ -205,7 +206,8 @@ def process_url(url, opts = {})
   output = {}
 
   begin
-    $stderr.puts "Processing #{url} with opts #{@options.inspect}"
+    $stderr.puts "Processing #{url}"
+    $stderr.puts "- with opts #{@options.inspect}"
     output_base_url = 'http://' + @env['HTTP_HOST'] + '/_out/'
     
     premailer = Premailer.new(url, @options)
