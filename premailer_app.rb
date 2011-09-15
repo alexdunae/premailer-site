@@ -171,7 +171,7 @@ def do_request
     @opts[:adapter] = :nokogiri
   end
 
-  $stderr.puts "- sending opts #{@opts.inspect}"
+  $stderr.puts "- sending  opts #{@opts.inspect}"
 
   res = process_url(html, @opts)
 
