@@ -113,10 +113,12 @@ def do_request
   @opts = {}
 
   if params[:content_source] == 'html' and not params[:html].empty?
+    $stderr.puts "Processing html string"
     @opts[:with_html_string] = true
     html = params[:html]
     @source_description = 'your HTML content'
   elsif not params[:url].empty?
+    $stderr.puts "Processing #{url}"
     html = params[:url]
     @source_description = html
   else
@@ -184,7 +186,6 @@ def process_url(url, opts = {})
   output = {}
 
   begin
-    $stderr.puts "Processing #{url}"
     $stderr.puts "- with opts #{@options.inspect}"
     output_base_url = 'http://' + @env['HTTP_HOST'] + '/_out/'
     
@@ -213,6 +214,8 @@ def process_url(url, opts = {})
         :html => out_html,
         :txt => out_plaintext
     }
+    
+    $stderr.puts "Saved HTML output to #{fhtml}"
 
   rescue OpenURI::HTTPError => e
     return_status = 500
