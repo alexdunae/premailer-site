@@ -118,8 +118,8 @@ def do_request
     html = params[:html]
     @source_description = 'your HTML content'
   elsif not params[:url].empty?
-    $stderr.puts "Processing #{url}"
     html = params[:url]
+    $stderr.puts "Processing #{html}"
     @source_description = html
   else
     @message = 'No input file specified'
