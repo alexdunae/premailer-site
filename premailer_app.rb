@@ -199,8 +199,8 @@ def process_url(url, opts = {})
       :secret_access_key => 'Cd6R8gAyTFRa88wbjbaWUDpDCEa7MITm3qLLYnaq'
     )
 
-    AWS::S3::S3Object.store("#{outfile}.txt", premailer.to_plain_text, AWS_BUCKET, :content_type => 'text/plain; charset=utf-8', :access => :authenticated_read)
-    AWS::S3::S3Object.store("#{outfile}.html", premailer.to_inline_css, AWS_BUCKET, :content_type => 'text/html; charset=utf-8', :access => :authenticated_read)
+    AWS::S3::S3Object.store("#{outfile}.txt", out_plaintext, AWS_BUCKET, :content_type => 'text/plain', :access => :authenticated_read)
+    AWS::S3::S3Object.store("#{outfile}.html", out_html, AWS_BUCKET, :content_type => 'text/html', :access => :authenticated_read)
 
     # keep the URLs up for two hours
     ftxt = AWS::S3::S3Object.url_for(outfile + '.txt', AWS_BUCKET, :use_ssl => true, :expires_in => 7200)
