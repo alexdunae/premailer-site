@@ -11,24 +11,6 @@ require 'htmlentities'
 require 'premailer'
 require 'aws/s3'
 
-
-# DataMapper.setup(:default, ENV['DATABASE_URL'] || 'sqlite3://premailer.db')
-# 
-# class Action
-#   include DataMapper::Resource
-#   
-#   property :id,        Serial
-#   property :name,      String
-#   property :source,    String
-#   property :url,       String
-#   property :body,      Text      
-#   property :options,   String
-#   property :created_at, DateTime
-# end
-# DataMapper.finalize
-# Action.auto_migrate!
-#
-
 @url = ''
 AWS_BUCKET = 'premailer'
 
