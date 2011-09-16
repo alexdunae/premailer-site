@@ -8,10 +8,6 @@ require 'builder'
 require 'json'
 require 'digest'
 require 'htmlentities'
-#require 'datamapper'
-#require 'dm-migrations'
-#require 'dm-sqlite-adapter' if development?
-#require 'dm-postgres-adapter' if production?
 require 'premailer'
 require 'aws/s3'
 
