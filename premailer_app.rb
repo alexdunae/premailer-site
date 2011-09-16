@@ -118,7 +118,7 @@ def do_request
     html = params[:html]
     @source_description = 'your HTML content'
   elsif not params[:url].empty?
-    html = params[:url]
+    html = params[:url].to_s.strip
     $stderr.puts "Processing #{html}"
     @source_description = html
   else
