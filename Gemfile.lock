@@ -23,6 +23,7 @@ GEM
     hpricot (0.8.4)
     hpricot (0.8.4-java)
     htmlentities (4.3.0)
+    json (1.4.6)
     mime-types (1.16)
     monkey-lib (0.5.4)
       backports
@@ -55,6 +56,7 @@ DEPENDENCIES
   haml
   hpricot
   htmlentities
+  json
   nokogiri
   premailer!
   sinatra (>= 1.0)
