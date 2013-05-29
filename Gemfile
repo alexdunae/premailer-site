@@ -10,6 +10,7 @@ gem 'nokogiri'
 gem 'hpricot'
 gem 'htmlentities'
 gem 'aws-s3', :require => 'aws/s3'
+gem 'thin'
 
 group :development, :test do
   gem 'sinatra-reloader'
