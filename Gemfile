@@ -4,7 +4,7 @@ source "https://rubygems.org"
 gem 'sinatra', '>= 1.0'
 gem 'haml'
 gem 'builder'
-gem 'premailer', :git => 'git://github.com/alexdunae/premailer.git', :branch => 'site-tests'
+gem 'premailer', :git => 'git://github.com/alexdunae/premailer.git' #, :branch => 'site-tests'
 gem 'json'
 gem 'nokogiri'
 gem 'hpricot'

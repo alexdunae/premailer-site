@@ -1,7 +1,6 @@
 GIT
   remote: git://github.com/alexdunae/premailer.git
-  revision: 76184f4612310d3fa72d887a6fd827e98cf07e20
-  branch: site-tests
+  revision: 023af276c8106294980eb9007e7ca4901fd568fd
   specs:
     premailer (1.7.3)
       css_parser (>= 1.1.9)
@@ -10,15 +9,18 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.2.6)
+    addressable (2.3.4)
     aws-s3 (0.6.2)
       builder
       mime-types
       xml-simple
     backports (2.3.0)
     builder (3.0.0)
-    css_parser (1.2.5)
+    css_parser (1.3.4)
       addressable
+    daemons (1.1.9)
+    eventmachine (1.0.3)
+    eventmachine (1.0.3-java)
     haml (3.1.3)
     hpricot (0.8.4)
     hpricot (0.8.4-java)
@@ -43,6 +45,10 @@ GEM
     sinatra-sugar (0.5.1)
       monkey-lib (~> 0.5.0)
       sinatra (~> 1.0)
+    thin (1.5.1)
+      daemons (>= 1.0.9)
+      eventmachine (>= 0.12.6)
+      rack (>= 1.0.0)
     tilt (1.3.3)
     xml-simple (1.1.0)
 
@@ -61,3 +67,4 @@ DEPENDENCIES
   premailer!
   sinatra (>= 1.0)
   sinatra-reloader
+  thin
