@@ -18,6 +18,7 @@ error do
   'Sorry there was a nasty error - ' + env['sinatra.error'].name
 end
 
+
 not_found do
   @message = 'This is nowhere to be found'
   erb :error
@@ -36,7 +37,7 @@ end
 
 post '/' do
   res = do_request
-  
+
   if res[:status] == 201
     @analytics_page = '/success'
     erb :results
@@ -45,7 +46,7 @@ post '/' do
     @analytics_page = '/error/processing'
     erb :error
   end
-  
+
 end
 
 get '/api' do
@@ -80,7 +81,7 @@ post '/api/0.1/documents' do
 
   output = {
     :version => '0.1',
-    :status => result[:status].to_i, 
+    :status => result[:status].to_i,
     :message => result[:message],
     :options => opts,
     :documents => {
@@ -89,7 +90,7 @@ post '/api/0.1/documents' do
     }
   }
 
-  
+
 
   if output[:status] == 500
     status 500
@@ -108,7 +109,7 @@ end
 
 def do_request
   @source_description = ''
-  @html = ''  
+  @html = ''
 
   @opts = {}
 
@@ -130,7 +131,7 @@ def do_request
   if params[:querystring]
     @opts[:link_query_string] = params[:querystring].strip
   end
-  
+
   if params[:preserve_styles] and params[:preserve_styles] == 'yes'
     @opts[:preserve_styles] = true
   end
@@ -142,7 +143,7 @@ def do_request
   if params[:remove_classes] and params[:remove_classes] == 'yes'
     @opts[:remove_classes] = true
   end
-  
+
   if params[:remove_comments] and params[:remove_comments] == 'yes'
     @opts[:remove_comments] = true
   end
@@ -172,9 +173,9 @@ def is_valid_api_key?(api_key)
   true
 end
 
-def process_url(url, opts = {}) 
+def process_url(url, opts = {})
   @options = {:warn_level => Premailer::Warnings::SAFE,
-              :text_line_length => 65, 
+              :text_line_length => 65,
               :link_query_string => nil,
               :verbose => true,
               :adapter => :hpricot
@@ -188,7 +189,7 @@ def process_url(url, opts = {})
   begin
     $stderr.puts "- with opts #{@options.inspect}"
     output_base_url = 'http://' + @env['HTTP_HOST'] + '/_out/'
-    
+
     premailer = Premailer.new(url, @options)
     outfile = generate_request_id(url)
 
@@ -214,7 +215,7 @@ def process_url(url, opts = {})
         :html => out_html,
         :txt => out_plaintext
     }
-    
+
     $stderr.puts "Saved HTML output to #{fhtml}"
 
   rescue OpenURI::HTTPError => e
@@ -228,7 +229,7 @@ def process_url(url, opts = {})
   end
 
 
-  {:status => return_status, 
+  {:status => return_status,
    :message => message,
    :url => url,
    :options => @options,
