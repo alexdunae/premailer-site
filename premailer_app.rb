@@ -15,7 +15,12 @@ require 'aws/s3'
 AWS_BUCKET = 'premailer'
 
 error do
-  'Sorry there was a nasty error - ' + env['sinatra.error'].name
+  e = env['sinatra.error']
+  backtrace = "Application error\n#{e}\n#{e.backtrace.join("\n")}"
+  puts backtrace
+  puts e.inspect
+
+  'Sorry there was an error'
 end
 
 
