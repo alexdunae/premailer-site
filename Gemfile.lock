@@ -1,12 +1,3 @@
-GIT
-  remote: git://github.com/alexdunae/premailer.git
-  revision: 76184f4612310d3fa72d887a6fd827e98cf07e20
-  branch: site-tests
-  specs:
-    premailer (1.7.3)
-      css_parser (>= 1.1.9)
-      htmlentities (>= 4.0.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -36,6 +27,10 @@ GEM
     mustermann (1.0.1)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
+    premailer (1.11.1)
+      addressable
+      css_parser (>= 1.6.0)
+      htmlentities (>= 4.0.0)
     public_suffix (3.0.1)
     rack (2.0.4)
     rack-protection (2.0.0)
@@ -73,7 +68,7 @@ DEPENDENCIES
   htmlentities
   json
   nokogiri
-  premailer!
+  premailer
   sinatra (>= 1.0)
   sinatra-reloader
   thin
