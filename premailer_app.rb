@@ -1,7 +1,7 @@
 $: << File.join(File.dirname(__FILE__), 'lib')
 require 'sinatra'
 require "sinatra/reloader" if development?
-require 'newrelic_rpm'
+require 'newrelic_rpm' if production?
 require 'haml'
 require 'nokogiri'
 require 'hpricot'
@@ -10,7 +10,7 @@ require 'json'
 require 'digest'
 require 'htmlentities'
 require 'premailer'
-require 'aws/s3'
+require 'aws-sdk-s3'
 
 set :show_exceptions, false
 
@@ -190,27 +190,29 @@ def process_url(url, opts = {})
     out_plaintext = premailer.to_plain_text
     out_html = premailer.to_inline_css
 
-    AWS::S3::Base.establish_connection!(
-      :access_key_id     => 'AKIAJGV6CM4KYKPTRSHA',
-      :secret_access_key => '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'
-    )
 
-    AWS::S3::S3Object.store("#{outfile}.txt", out_plaintext, AWS_BUCKET, :content_type => 'text/plain', :access => :authenticated_read)
-    AWS::S3::S3Object.store("#{outfile}.html", out_html, AWS_BUCKET, :content_type => 'text/html', :access => :authenticated_read)
+    Aws.config.update({
+      region: 'us-east-1',
+      credentials: Aws::Credentials.new('AKIAJGV6CM4KYKPTRSHA', 'Cd6R8gAyTFRa88wbjbaWUDpDCEa7MITm3qLLYnaq')
+    })
 
-    # keep the URLs up for two hours
-    ftxt = AWS::S3::S3Object.url_for(outfile + '.txt', AWS_BUCKET, :use_ssl => true, :expires_in => 7200)
-    fhtml = AWS::S3::S3Object.url_for(outfile + '.html', AWS_BUCKET, :use_ssl => true, :expires_in => 7200)
+    s3 = Aws::S3::Resource.new(region:'us-east-1')
+
+    text_obj = s3.bucket(AWS_BUCKET).object("#{outfile}.txt")
+    text_obj.put(body: out_plaintext, :content_type => 'text/plain', acl: 'authenticated-read', expires: Time.now + 7200)
+
+    html_obj = s3.bucket(AWS_BUCKET).object("#{outfile}.html")
+    html_obj.put(body: out_html, :content_type => 'text/html', acl: 'authenticated-read', expires: Time.now + 7200)
 
     warnings = premailer.warnings
     output = {
-        :html_file => fhtml,
-        :txt_file  => ftxt,
+        :html_file => html_obj.presigned_url(:get, expires_in: 7200),
+        :txt_file  => text_obj.presigned_url(:get, expires_in: 7200),
         :html => out_html,
         :txt => out_plaintext
     }
 
-    $stderr.puts "Saved HTML output to #{fhtml}"
+    $stderr.puts "Saved HTML output to #{output[:html_file]}"
 
   rescue OpenURI::HTTPError => e
     return_status = 500
