@@ -75,7 +75,7 @@ post '/api/0.1/documents' do
     return 400, [{:message => 'No input file specified', :version => '0.1', :status => 400}.to_json]
   end
 
-  opts[:adapter] = (params[:adapter] and params[:adapter] == 'nokogiri') ? :nokogiri : :hpricot
+  opts[:adapter] = :nokogiri
   opts[:base_url] = params[:base_url].strip if params[:base_url]
   opts[:line_length] = params[:line_length].strip.to_i if params[:line_length]
   opts[:link_query_string] = params[:link_query_string].strip if params[:link_query_string]
@@ -96,8 +96,6 @@ post '/api/0.1/documents' do
       :txt => result[:output][:txt_file],
     }
   }
-
-
 
   if output[:status] == 500
     status 500
@@ -153,9 +151,7 @@ def do_request
     @opts[:remove_comments] = true
   end
 
-  if params[:adapter] and params[:adapter] == 'nokogiri'
-    @opts[:adapter] = :nokogiri
-  end
+  @opts[:adapter] = :nokogiri
 
   $stderr.puts "- sending  opts #{@opts.inspect}"
 

@@ -1,8 +1,18 @@
-   
+
     <h1>Premailer</h1>
-    
+
     <p class="lede">Pre-flight for HTML email.</p>
     <div class="body">
+
+      <div class="announcement">
+        <h2><span>Premailer needs your help</span></h2>
+
+        <p>Premailer has been chewing through HTML email templates since 2007 and has been used by 10s of thousands of people to make HTML email a little less horrible.</p>
+
+        <p>Since then, Dialect (that’s us) have moved away from build websites (we have a <a href="https://tickit.ca/">ticketing business now</a>) and need to find something to do with Premailer.</p>
+
+        <p>If you work for a web dev shop and would We’ve been paying the hosting since Premailer was first setup.
+      </div>
 
 
     <form method="post" action="/" id="premailer_form">
@@ -10,7 +20,7 @@
         <label class="toggle" id="process_url_label">Use a URL as the source
           <p class="sublabel">Don&rsquo;t forget http://.</p>
         </label>
-        
+
         <span id="process_url">
           <input type="hidden" name="content_source" id="content_source" value="url">
           <input type="text" class='text' id="url" name="url" value="<%= @initial_doc %>">
@@ -22,7 +32,7 @@
         <label class="toggle" id="process_html_label">Paste HTML as the source
           <pspan class="sublabel">Make sure you use absolute URLs.</p>
         </label>
-        
+
         <span id="process_html">
           <input type="hidden" name="content_source" id="content_source" value="html">
           <textarea id="html" name="html" cols="20" rows="5"></textarea>
@@ -30,14 +40,12 @@
       </div>
 
 
-
-
     <div class="field optional text">
       <label for="querystring">Query string to append to links
         <span class="sublabel">Useful for adding tracking codes.</span>
         </label>
       <input type="text" id="querystring" name="querystring" class="text" value="">
-      
+
     </div>
 
     <div class="optional field ">
@@ -47,7 +55,6 @@
         <label class="check"><input type="checkbox" id="remove_ids" name="remove_ids" value="yes"> Remove unused IDs</label>
         <label class="check"><input type="checkbox" id="remove_comments" name="remove_comments" value="yes"> Remove comments</label><br>
         <label class="check"><input type="checkbox" id="preserve_styles" name="preserve_styles" value="yes"> Don’t remove &lt;style&gt; and &lt;link&gt; elements</label>
-        <label class="check"><input type="checkbox" id="adapter" name="adapter" value="nokogiri"> Try the alternative Nokogiri HTML parser</label>
       </div>
     </div>
 
@@ -56,7 +63,7 @@
     </div>
     </form>
 
-  
+
 
 <div class="thanks meta">Many thanks to <a href="http://www.campaignmonitor.com/">Campaign Monitor</a>, Premailer&rsquo;s sponsor.  They do all this inline CSS voodoo automatically each time you send a message, and their <a href="http://www.campaignmonitor.com/features/screens/send-create.aspx">interface</a> is pretty, easy and powerful. If you haven't checked them out yet we heartily recommend you do.</div>
 
@@ -90,23 +97,23 @@
 
 
   <h2><span>Bookmarklet</span></h2>
-  
+
   <p>If you&rsquo;re using Firefox 3+, you can use a bookmarklet as a shortcut to processing pages.</p>
-  
+
   <p>To install, drag this link up to your toolbar: <a style="background: #eee none; padding: 2px 4px; border: 1px solid #ccc;" title="Make CSS inline with Premailer" href="javascript:(function(){document.body.appendChild(document.createElement('script')).src='http://premailer.dialect.ca/inc/bookmarklet-1.0.js';})();">Premailer</a></p>
-  
+
   <h2><span>Premailer API</span></h2>
-  
+
   <p>A beta API for Premailer is now available.  See the <a href="/api">API documentation</a> for details.</p>
 
 
   <h2><span>Under the hood</span></h2>
 
   <p>The current version, <%= Premailer::VERSION %>, has a new home and active development has resumed.  Please update your bookmarks to <a href="http://premailer.dialect.ca/">http://premailer.dialect.ca/</a>.
-  
+
   <p>Updates are announced at <a href="http://twitter.com/TheCHANGELOG">http://twitter.com/TheCHANGELOG</a>.</p>
 
-  <p>Premailer is written in Ruby, with a lot of help from Nokogiri, Hpricot and the <a href="http://www.sinatrarb.com/">Sinatra</a> framework (goodbye eruby).  The source is available on <a href="http://github.com/alexdunae/premailer/">GitHub</a>.  Please <a href="https://github.com/alexdunae/premailer/issues">file a bug report</a> if anything goes haywire.</p>
+  <p>Premailer is written in Ruby, with a lot of help from Nokogiri, Hpricot and the <a href="http://www.sinatrarb.com/">Sinatra</a> framework (goodbye eruby).  The source is available on <a href="http://github.com/alexdunae/premailer/">GitHub</a>.</p>
 
   <p>Written by Alex Dunae at Dialect. Copyright 2007-11.</p>
 </div>
