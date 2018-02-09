@@ -11,6 +11,8 @@ require 'htmlentities'
 require 'premailer'
 require 'aws/s3'
 
+set :show_exceptions, false
+
 @url = ''
 AWS_BUCKET = 'premailer'
 
@@ -59,7 +61,6 @@ get '/api' do
 end
 
 post '/api/0.1/documents' do
-  set :show_exceptions, false
   content_type 'application/json', :charset => 'utf-8'
   opts = {}
   source = nil
