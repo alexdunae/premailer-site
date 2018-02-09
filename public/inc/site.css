@@ -1,0 +1,21 @@
+.announcement {
+  background-color: #dedede;
+  padding: 0.2em 1.5em;
+}
+
+.announcement h2 {
+  margin-top: 20px;
+  background: transparent;
+}
+
+.announcement h2 span {
+  background-color: #dedede;
+}
+
+.announcement p {
+  margin-bottom: 10px;
+}
+
+.announcement li {
+  margin-bottom: 5px;
+}
