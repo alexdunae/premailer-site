@@ -171,7 +171,7 @@ def process_url(url, opts = {})
               :text_line_length => 65,
               :link_query_string => nil,
               :verbose => true,
-              :adapter => :hpricot
+              :adapter => :nokogiri
               }.merge(opts)
 
   return_status = 201
