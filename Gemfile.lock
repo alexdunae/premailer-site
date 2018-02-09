@@ -25,6 +25,7 @@ GEM
     mini_portile2 (2.3.0)
     multi_json (1.13.1)
     mustermann (1.0.1)
+    newrelic_rpm (3.9.8.273)
     nokogiri (1.8.2)
       mini_portile2 (~> 2.3.0)
     premailer (1.11.1)
@@ -67,6 +68,7 @@ DEPENDENCIES
   hpricot
   htmlentities
   json
+  newrelic_rpm
   nokogiri
   premailer
   sinatra (>= 1.0)
