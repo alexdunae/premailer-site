@@ -19,9 +19,10 @@ AWS_BUCKET = 'premailer'
 error do
   e = env['sinatra.error']
   backtrace = "Application error\n#{e}\n#{e.backtrace.join("\n")}"
-  puts backtrace
-  puts e.inspect
+  $stderr.puts backtrace
+  $stderr.puts e.inspect
 
+  status 500
   'Sorry there was an error'
 end
 
@@ -120,13 +121,11 @@ def do_request
   @opts = {}
 
   if params[:content_source] == 'html' and not params[:html].empty?
-    $stderr.puts "Processing html string"
     @opts[:with_html_string] = true
     html = params[:html]
     @source_description = 'your HTML content'
   elsif not params[:url].empty?
     html = params[:url].to_s.strip
-    $stderr.puts "Processing #{html}"
     @source_description = html
   else
     @message = 'No input file specified'
@@ -161,14 +160,6 @@ def do_request
   $stderr.puts "- sending  opts #{@opts.inspect}"
 
   res = process_url(html, @opts)
-
-  # @post = Action.create(
-  #   :name      => 'premailer',
-  #   :source    => 'form',
-  #   :url       => params[:url],
-  #   :body      => params[:html],
-  #   :options   => opts
-  # )
 
   @results = res
   @results
