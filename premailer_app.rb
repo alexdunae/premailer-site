@@ -11,6 +11,10 @@ require 'digest'
 require 'htmlentities'
 require 'premailer'
 require 'aws-sdk-s3'
+require 'rack/throttle'
+require 'redis'
+
+use Rack::Throttle::Minute, :cache => Redis.new, :key_prefix => :throttle
 
 set :show_exceptions, false
 

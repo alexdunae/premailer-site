@@ -11,6 +11,8 @@ gem 'hpricot'
 gem 'htmlentities'
 gem 'aws-sdk-s3', '~> 1'
 gem 'thin'
+gem 'rack-throttle'
+gem 'redis'
 
 group :development, :test do
   gem 'sinatra-reloader'
