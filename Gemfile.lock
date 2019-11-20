@@ -81,5 +81,8 @@ DEPENDENCIES
   sinatra-reloader
   thin
 
+RUBY VERSION
+   ruby 2.6.1p33
+
 BUNDLED WITH
-   1.11.2
+   1.17.2
