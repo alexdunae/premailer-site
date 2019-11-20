@@ -1,4 +1,6 @@
-$:.unshift File.dirname(__FILE__)
+# frozen_string_literal: true
+
+$LOAD_PATH.unshift File.dirname(__FILE__)
 $stdout.sync = true
 
 require 'rubygems'

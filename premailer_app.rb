@@ -1,6 +1,8 @@
-$: << File.join(File.dirname(__FILE__), 'lib')
+# frozen_string_literal: true
+
+$LOAD_PATH << File.join(File.dirname(__FILE__), 'lib')
 require 'sinatra'
-require "sinatra/reloader" if development?
+require 'sinatra/reloader' if development?
 require 'newrelic_rpm' if production?
 require 'haml'
 require 'nokogiri'
@@ -14,7 +16,7 @@ require 'aws-sdk-s3'
 require 'rack/throttle'
 require 'redis'
 
-use Rack::Throttle::Minute, :cache => Redis.new, :key_prefix => :throttle
+use Rack::Throttle::Minute, cache: Redis.new, key_prefix: :throttle
 
 set :show_exceptions, false
 
@@ -24,13 +26,12 @@ AWS_BUCKET = 'premailer'
 error do
   e = env['sinatra.error']
   backtrace = "Application error\n#{e}\n#{e.backtrace.join("\n")}"
-  $stderr.puts backtrace
-  $stderr.puts e.inspect
+  warn backtrace
+  warn e.inspect
 
   status 500
   'Sorry there was an error'
 end
-
 
 not_found do
   @message = 'This is nowhere to be found'
@@ -40,7 +41,7 @@ end
 get '/' do
   @initial_doc = 'https://dialect.ca/premailer-tests/base.html'
 
-  if not params[:bookmarklet].nil?
+  if !params[:bookmarklet].nil?
     do_request
     erb :results
   else
@@ -59,7 +60,6 @@ post '/' do
     @analytics_page = '/error/processing'
     erb :error
   end
-
 end
 
 get '/api' do
@@ -67,38 +67,38 @@ get '/api' do
 end
 
 post '/api/0.1/documents' do
-  content_type 'application/json', :charset => 'utf-8'
+  content_type 'application/json', charset: 'utf-8'
   opts = {}
   source = nil
 
-  if params[:html] and not params[:html].empty?
+  if params[:html] && !params[:html].empty?
     opts[:with_html_string] = true
     source = params[:html]
-  elsif params[:url] and not params[:url].empty?
+  elsif params[:url] && !params[:url].empty?
     source = params[:url]
   else
-    return 400, [{:message => 'No input file specified', :version => '0.1', :status => 400}.to_json]
+    return 400, [{ message: 'No input file specified', version: '0.1', status: 400 }.to_json]
   end
 
   opts[:adapter] = :nokogiri
   opts[:base_url] = params[:base_url].strip if params[:base_url]
   opts[:line_length] = params[:line_length].strip.to_i if params[:line_length]
   opts[:link_query_string] = params[:link_query_string].strip if params[:link_query_string]
-  opts[:preserve_styles] = (params[:preserve_styles] and params[:preserve_styles] == 'false') ? false : true
-  opts[:remove_ids] = (params[:remove_ids] and params[:remove_ids] == 'true') ? true : false
-  opts[:remove_classes] = (params[:remove_classes] and params[:remove_classes] == 'true') ? true : false
-  opts[:remove_comments] = (params[:remove_comments] and params[:remove_comments] == 'true') ? true : false
+  opts[:preserve_styles] = params[:preserve_styles] && (params[:preserve_styles] == 'false') ? false : true
+  opts[:remove_ids] = params[:remove_ids] && (params[:remove_ids] == 'true') ? true : false
+  opts[:remove_classes] = params[:remove_classes] && (params[:remove_classes] == 'true') ? true : false
+  opts[:remove_comments] = params[:remove_comments] && (params[:remove_comments] == 'true') ? true : false
 
-  result = process_url(source, opts.merge({:io_exceptions => false}))
+  result = process_url(source, opts.merge(io_exceptions: false))
 
   output = {
-    :version => '0.1',
-    :status => result[:status].to_i,
-    :message => result[:message],
-    :options => opts,
-    :documents => {
-      :html => result[:output][:html_file],
-      :txt => result[:output][:txt_file],
+    version:   '0.1',
+    status:    result[:status].to_i,
+    message:   result[:message],
+    options:   opts,
+    documents: {
+      html: result[:output][:html_file],
+      txt:  result[:output][:txt_file]
     }
   }
 
@@ -123,11 +123,11 @@ def do_request
 
   @opts = {}
 
-  if params[:content_source] == 'html' and not params[:html].empty?
+  if (params[:content_source] == 'html') && !params[:html].empty?
     @opts[:with_html_string] = true
     html = params[:html]
     @source_description = 'your HTML content'
-  elsif not params[:url].empty?
+  elsif !params[:url].empty?
     html = params[:url].to_s.strip
     @source_description = html
   else
@@ -136,29 +136,19 @@ def do_request
     erb :error
   end
 
-  if params[:querystring]
-    @opts[:link_query_string] = params[:querystring].strip
-  end
+  @opts[:link_query_string] = params[:querystring].strip if params[:querystring]
 
-  if params[:preserve_styles] and params[:preserve_styles] == 'yes'
-    @opts[:preserve_styles] = true
-  end
+  @opts[:preserve_styles] = true if params[:preserve_styles] && (params[:preserve_styles] == 'yes')
 
-  if params[:remove_ids] and params[:remove_ids] == 'yes'
-    @opts[:remove_ids] = true
-  end
+  @opts[:remove_ids] = true if params[:remove_ids] && (params[:remove_ids] == 'yes')
 
-  if params[:remove_classes] and params[:remove_classes] == 'yes'
-    @opts[:remove_classes] = true
-  end
+  @opts[:remove_classes] = true if params[:remove_classes] && (params[:remove_classes] == 'yes')
 
-  if params[:remove_comments] and params[:remove_comments] == 'yes'
-    @opts[:remove_comments] = true
-  end
+  @opts[:remove_comments] = true if params[:remove_comments] && (params[:remove_comments] == 'yes')
 
   @opts[:adapter] = :nokogiri
 
-  $stderr.puts "- sending  opts #{@opts.inspect}"
+  warn "- sending  opts #{@opts.inspect}"
 
   res = process_url(html, @opts)
 
@@ -166,18 +156,16 @@ def do_request
   @results
 end
 
-
-def is_valid_api_key?(api_key)
+def is_valid_api_key?(_api_key)
   true
 end
 
 def process_url(url, opts = {})
-  @options = {:warn_level => Premailer::Warnings::SAFE,
-              :text_line_length => 65,
-              :link_query_string => nil,
-              :verbose => true,
-              :adapter => :nokogiri
-              }.merge(opts)
+  @options = { warn_level:        Premailer::Warnings::SAFE,
+               text_line_length:  65,
+               link_query_string: nil,
+               verbose:           true,
+               adapter:           :nokogiri }.merge(opts)
 
   return_status = 201
   message = 'Created'
@@ -185,7 +173,7 @@ def process_url(url, opts = {})
   output = {}
 
   begin
-    $stderr.puts "- with opts #{@options.inspect}"
+    warn "- with opts #{@options.inspect}"
     output_base_url = 'http://' + @env['HTTP_HOST'] + '/_out/'
 
     premailer = Premailer.new(url, @options)
@@ -194,51 +182,45 @@ def process_url(url, opts = {})
     out_plaintext = premailer.to_plain_text
     out_html = premailer.to_inline_css
 
-
-    Aws.config.update({
-      region: 'us-east-1',
+    Aws.config.update(
+      region:      'us-east-1',
       credentials: Aws::Credentials.new('AKIAJGV6CM4KYKPTRSHA', 'Cd6R8gAyTFRa88wbjbaWUDpDCEa7MITm3qLLYnaq')
-    })
+    )
 
-    s3 = Aws::S3::Resource.new(region:'us-east-1')
+    s3 = Aws::S3::Resource.new(region: 'us-east-1')
 
     text_obj = s3.bucket(AWS_BUCKET).object("#{outfile}.txt")
-    text_obj.put(body: out_plaintext, :content_type => 'text/plain', acl: 'authenticated-read', expires: Time.now + 7200)
+    text_obj.put(body: out_plaintext, content_type: 'text/plain', acl: 'authenticated-read', expires: Time.now + 7200)
 
     html_obj = s3.bucket(AWS_BUCKET).object("#{outfile}.html")
-    html_obj.put(body: out_html, :content_type => 'text/html', acl: 'authenticated-read', expires: Time.now + 7200)
+    html_obj.put(body: out_html, content_type: 'text/html', acl: 'authenticated-read', expires: Time.now + 7200)
 
     warnings = premailer.warnings
     output = {
-        :html_file => html_obj.presigned_url(:get, expires_in: 7200),
-        :txt_file  => text_obj.presigned_url(:get, expires_in: 7200),
-        :html => out_html,
-        :txt => out_plaintext
+      html_file: html_obj.presigned_url(:get, expires_in: 7200),
+      txt_file:  text_obj.presigned_url(:get, expires_in: 7200),
+      html:      out_html,
+      txt:       out_plaintext
     }
 
-    $stderr.puts "Saved HTML output to #{output[:html_file]}"
-
+    warn "Saved HTML output to #{output[:html_file]}"
   rescue OpenURI::HTTPError => e
     return_status = 500
     message = 'Source file not found'
-
   rescue Exception => e
     raise e
     return_status = 500
     message = e.message
   end
 
-
-  {:status => return_status,
-   :message => message,
-   :url => url,
-   :options => @options,
-   :warnings => warnings,
-   :output => output
-  }
+  { status:   return_status,
+    message:  message,
+    url:      url,
+    options:  @options,
+    warnings: warnings,
+    output:   output }
 end
 
 def generate_request_id(url)
   Digest::MD5.hexdigest("#{url}#{inspect}#{Time.now}#{rand}")
 end
-
