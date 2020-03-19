@@ -21,7 +21,7 @@ use Rack::Throttle::Minute, cache: Redis.new, key_prefix: :throttle
 set :show_exceptions, false
 
 @url = ''
-AWS_BUCKET = 'premailer'
+AWS_BUCKET = ENV['AWS_BUCKET']
 
 error do
   e = env['sinatra.error']
@@ -183,11 +183,11 @@ def process_url(url, opts = {})
     out_html = premailer.to_inline_css
 
     Aws.config.update(
-      region:      'us-east-1',
+      region:      ENV['AWS_REGION'],
       credentials: Aws::Credentials.new(ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'])
     )
 
-    s3 = Aws::S3::Resource.new(region: 'us-east-1')
+    s3 = Aws::S3::Resource.new(region: ENV['AWS_REGION'])
 
     text_obj = s3.bucket(AWS_BUCKET).object("#{outfile}.txt")
     text_obj.put(body: out_plaintext, content_type: 'text/plain', acl: 'authenticated-read', expires: Time.now + 7200)
