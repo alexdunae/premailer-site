@@ -14,10 +14,10 @@
     %link{:rel=>'stylesheet', :type=>'text/css', :href=> '/inc/premailer.css'}
     :javascript
       document.documentElement.className = 'js';
-      
+
       var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
       document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-      
+
       try {
       var pageTracker = _gat._getTracker("UA-4707751-2");
       <% if @analytics_page %>
@@ -26,33 +26,18 @@
       pageTracker._trackPageview();
       <% end %>
       } catch(err) {}
-      
-      
+
+
     %script{:type=>'text/javascript',:src=>'http://dialect.ca/inc/lib.min.js'}
 
   %body.code
-  %div#container.vcard
-
-    %header
-      %div#logo
-        %a{:href=>"http://dialect.ca/", :rel=>"home"}.org.fn Dialect
-
-      %nav
-        %ul#nav
-          %li.first
-            %a{:href=>"http://premailer.dialect.ca/", :rel=>"home"} Premailer
-          %li
-            %a{:href=>"http://dialect.ca/#studies", :rel=>"studies"} Work
-          %li
-            %a{:href=>"http://dialect.ca/#contact", :rel=>"contact"} Contact
-    
-
+  %div#container
     %div#page
       %div#content
         = yield
 
 
-      
+
       :javascript
         $(document).ready(function () {
           $('#process_html').hide();
@@ -81,12 +66,12 @@
       %h2 Contact
       %p
         %a.email{:href=>"mailto:code@dialect.ca"} code@dialect.ca
-      
-    
+
+
     %footer
       %div
         %a{:href=>"http://dialect.ca/"}
           %img{:src=>"http://dialect.ca/inc/logo-sm.png", :width=>38,:height=>28, :alt=>'Dialect logo'}
         %p#legal
           %a{:href=>"http://dialect.ca/code/"} Code &bull; Copyright 2011 Dialect Communications Group
-    
+
