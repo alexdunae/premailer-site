@@ -3,7 +3,6 @@
 $LOAD_PATH << File.join(File.dirname(__FILE__), 'lib')
 require 'sinatra'
 require 'sinatra/reloader' if development?
-require 'newrelic_rpm' if production?
 require 'haml'
 require 'nokogiri'
 require 'hpricot'

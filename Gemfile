@@ -19,7 +19,3 @@ gem 'thin'
 group :development, :test do
   gem 'sinatra-reloader'
 end
-
-group :production do
-  gem 'newrelic_rpm'
-end
