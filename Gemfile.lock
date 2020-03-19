@@ -21,6 +21,7 @@ GEM
     css_parser (1.6.0)
       addressable
     daemons (1.2.6)
+    dotenv (2.7.5)
     eventmachine (1.2.5)
     haml (5.0.4)
       temple (>= 0.8.0)
@@ -73,6 +74,7 @@ PLATFORMS
 DEPENDENCIES
   aws-sdk-s3 (~> 1)
   builder
+  dotenv
   haml
   hpricot
   htmlentities

@@ -5,6 +5,7 @@ ruby '2.6.1'
 
 gem 'aws-sdk-s3', '~> 1'
 gem 'builder'
+gem 'dotenv'
 gem 'haml'
 gem 'hpricot'
 gem 'htmlentities'
