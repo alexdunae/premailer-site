@@ -183,7 +183,7 @@ def process_url(url, opts = {})
 
     Aws.config.update(
       region:      'us-east-1',
-      credentials: Aws::Credentials.new('AKIAJGV6CM4KYKPTRSHA', 'Cd6R8gAyTFRa88wbjbaWUDpDCEa7MITm3qLLYnaq')
+      credentials: Aws::Credentials.new(ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'])
     )
 
     s3 = Aws::S3::Resource.new(region: 'us-east-1')
