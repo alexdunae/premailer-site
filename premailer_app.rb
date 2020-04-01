@@ -49,7 +49,7 @@ get '/' do
   end
 end
 
-post '/' do
+post '/premailer' do
   res = do_request
 
   if res[:status] == 201
