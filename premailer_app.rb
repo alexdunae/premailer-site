@@ -38,7 +38,7 @@ not_found do
   erb :error
 end
 
-get '/premailer/' do
+get '/' do
   @initial_doc = 'https://dialect.ca/premailer-tests/base.html'
 
   if !params[:bookmarklet].nil?
@@ -49,7 +49,7 @@ get '/premailer/' do
   end
 end
 
-post '/premailer/' do
+post '/' do
   res = do_request
 
   if res[:status] == 201
