@@ -191,9 +191,9 @@ def process_url(url, opts = {})
 
     if params[:remove_linebreaks] == 'yes'
       
-      out_plaintext = out_plaintext.gsub("\n\n","\f")
-      out_plaintext = out_plaintext.gsub("\r\n","")
-      out_plaintext = out_plaintext.gsub("\f","\n\n")
+      out_plaintext = out_plaintext.gsub("\n\n", "\f")
+      out_plaintext = out_plaintext.gsub("\n", " ")
+      out_plaintext = out_plaintext.gsub("\f", "\n\n")
     end
     out_plaintext = out_plaintext.gsub(/%5D|%7D|%5B|%7B/, "%5B" => "[", "%5D" => "]", "%7B" => "{", "%7D" => "}")
     out_html = out_html.gsub(/%5D|%7D|%5B|%7B/, "%5B" => "[", "%5D" => "]", "%7B" => "{", "%7D" => "}")
