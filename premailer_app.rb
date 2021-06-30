@@ -18,7 +18,7 @@ require 'redis'
 
 use Rack::Throttle::Minute, cache: Redis.new, key_prefix: :throttle
 
-set :show_exceptions, false
+set :show_exceptions, true
 
 @url = ''
 AWS_BUCKET = ENV['AWS_BUCKET']
@@ -39,7 +39,7 @@ not_found do
 end
 
 get '/' do
-  @initial_doc = 'https://dialect.ca/premailer-tests/base.html'
+  @initial_doc = 'https://www.graphicxtreme.com/premailer/tests/base.html'
 
   if !params[:bookmarklet].nil?
     do_request
@@ -189,6 +189,15 @@ def process_url(url, opts = {})
 
     s3 = Aws::S3::Resource.new(region: ENV['AWS_REGION'])
 
+    if params[:remove_linebreaks] == 'yes'
+      
+      out_plaintext = out_plaintext.gsub("\n\n", "\f")
+      out_plaintext = out_plaintext.gsub("\n", " ")
+      out_plaintext = out_plaintext.gsub("\f", "\n\n")
+    end
+    out_plaintext = out_plaintext.gsub(/%5D|%7D|%5B|%7B/, "%5B" => "[", "%5D" => "]", "%7B" => "{", "%7D" => "}")
+    out_html = out_html.gsub(/%5D|%7D|%5B|%7B/, "%5B" => "[", "%5D" => "]", "%7B" => "{", "%7D" => "}")
+    # out_html = out_html.gsub("%7D","}")
     text_obj = s3.bucket(AWS_BUCKET).object("#{outfile}.txt")
     text_obj.put(body: out_plaintext, content_type: 'text/plain', acl: 'authenticated-read', expires: Time.now + 7200)
 

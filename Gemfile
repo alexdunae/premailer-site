@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
-ruby '2.6.1'
+ruby '2.4.9'
 
 gem 'aws-sdk-s3', '~> 1'
 gem 'builder'
