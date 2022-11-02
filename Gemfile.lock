@@ -24,7 +24,7 @@ GEM
       addressable
     dotenv (2.7.5)
     htmlentities (4.3.4)
-    jmespath (1.4.0)
+    jmespath (1.6.1)
     json (2.3.0)
     mini_portile2 (2.8.0)
     mustermann (3.0.0)
