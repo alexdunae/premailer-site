@@ -1,0 +1,7 @@
+**/public/_out/*.html
+**/public/_out/*.txt
+**/tmp
+**/logs/*
+**/.DS_Store
+**/.bundle
+**/.env
