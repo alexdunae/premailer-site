@@ -3,9 +3,7 @@
 $LOAD_PATH << File.join(File.dirname(__FILE__), 'lib')
 require 'dotenv/load'
 require 'sinatra'
-require 'sinatra/reloader' if development?
 require 'nokogiri'
-require 'hpricot'
 require 'builder'
 require 'json'
 require 'digest'
@@ -15,7 +13,7 @@ require 'aws-sdk-s3'
 require 'rack/throttle'
 require 'redis'
 
-use Rack::Throttle::Minute, cache: Redis.new, key_prefix: :throttle
+use Rack::Throttle::Minute, cache: Redis.new(url: ENV["REDIS_URL"]), key_prefix: :throttle
 
 set :show_exceptions, false
 
