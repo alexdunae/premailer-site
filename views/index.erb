@@ -1,88 +1,79 @@
+<div class="container">
 
-    <h1>Premailer</h1>
 
-    <p class="lede">Pre-flight for HTML email.</p>
-    <div class="body">
-
-      <div class="announcement" style="background-color: #ffffe0; margin-bottom: 24px;">
-        <h2><span style="background-color: #ffffe0;">April 7 update</span></h2>
-      <p>Mr. Templates has spun up a copy of Premailer running on their own servers, give the app a new home for the immediate future.</p>
-
-      <p>Thanks to Mr. Templates for taking the app on.  You can <a href="https://www.mrtemplates.com/premailer/">check out Premailer's new home here</a>: <a href="https://www.mrtemplates.com/premailer/">mrtemplates.com/premailer</a>.</p>
-
-      <p>🥳</p>
-    </div>
-
-      <div class="announcement" style="background-color: #ffffe0;">
-        <h2><span style="background-color: #ffffe0;">Premailer will be shutting down</span></h2>
-
-        <p>Premailer has been chewing through HTML email templates since 2007(!) and has been used by 10s of thousands of people to make working with HTML email a little less horrible.</p>
-
-        <p>We are no longer able to keep it running.  Would you like to?  Here's what is involved...</p>
-
-        <ul>
-          <li>You setup a Heroku account (or Ruby hosting of your choice)</li>
-          <li>Set up an S3 bucket</li>
-          <li>Fork <a href="https://github.com/alexdunae/premailer-site/">the git repository</a> and get your version up and running</li>
-          <li>Let me know ( code [at] dunae [dot] ca ) and we can direct people to your version :)
-        </ul>
-
-        <p>Be forewarned, the code is old and hasn't received much love.  The dependencies are largely up-to-date though and getting running on Heroku should be pretty easy.
-
-      </div>
 
 
     <form method="post" action="/" id="premailer_form">
-      <div class="field text">
-        <label class="toggle" id="process_url_label">Use a URL as the source
-          <p class="sublabel">Don&rsquo;t forget http://.</p>
-        </label>
 
-        <span id="process_url">
-          <input type="hidden" name="content_source" id="content_source" value="url">
-          <input type="text" class='text' id="url" name="url" value="<%= @initial_doc %>">
-        </span>
+      <div class="row mb-3 field text"  id="process_url">
+        <div class="col col-md-4">
+          <label class="btn btn-primary toggle" id="process_url_label">Use a URL as the source</label>
+        </div>
+
+        <div class="col col-md-auto">
+          <div class="toggleable-inputs">
+            <input type="hidden" name="content_source" id="content_source" value="url">
+            <input type="text" class='text form-control-lg' id="url" name="url" value="<%= @initial_doc %>">
+            <p><small>Don&rsquo;t forget http://</small></p>
+          </div>
+        </div>
       </div>
 
 
-      <div class="field textarea">
-        <label class="toggle" id="process_html_label">Paste HTML as the source
-          <pspan class="sublabel">Make sure you use absolute URLs.</p>
-        </label>
+      <div class="row mb-3 field textarea" id="process_html">
+        <div class="col col-md-4">
+        <label class="btn btn-secondary toggle" id="process_html_label">Paste HTML as the source
 
-        <span id="process_html">
+        </label>
+        </div>
+
+        <div class="col col-md-auto">
+        <div class="toggleable-inputs">
           <input type="hidden" name="content_source" id="content_source" value="html">
-          <textarea id="html" name="html" cols="20" rows="5"></textarea>
-        </span>
+          <textarea id="html" name="html" cols="20" rows="5" class="text form-control-lg"></textarea>
+          <p><small>Make sure you use absolute URLs.</small></p>
+        </div>
+        </div>
       </div>
 
 
-    <div class="field optional text">
-      <label for="querystring">Query string to append to links
+    <div class="row mb-3 field optional text">
+      <div class="col col-md-4">
+      <label class="form-label" for="querystring">Query string to append to links
         <span class="sublabel">Useful for adding tracking codes.</span>
         </label>
-      <input type="text" id="querystring" name="querystring" class="text" value="">
+        </div>
+
+        <div class="col col-md-auto">
+      <input type="text" id="querystring" name="querystring" class="form-control-lg text" value="">
+      </div>
 
     </div>
 
-    <div class="optional field ">
-      <label>Options</label>
+    <div class="optional field mb-3">
+      <h4>Options</h4>
       <div class="checkboxes">
-        <label class="check"><input type="checkbox" id="remove_classes" name="remove_classes" value="yes"> Remove classes</label>
-        <label class="check"><input type="checkbox" id="remove_ids" name="remove_ids" value="yes"> Remove unused IDs</label>
-        <label class="check"><input type="checkbox" id="remove_comments" name="remove_comments" value="yes"> Remove comments</label><br>
-        <label class="check"><input type="checkbox" id="preserve_styles" name="preserve_styles" value="yes"> Don’t remove &lt;style&gt; and &lt;link&gt; elements</label>
+        <div class="form-check">
+        <label class="form-check-label"><input type="checkbox" class="form-check-input" id="remove_classes" name="remove_classes" value="yes"> Remove classes</label>
+        </div>
+        <div class="form-check">
+        <label class="form-check-label"><input type="checkbox" class="form-check-input" id="remove_ids" name="remove_ids" value="yes"> Remove unused IDs</label>
+        </div>
+        <div class="form-check">
+        <label class="form-check-label"><input type="checkbox" class="form-check-input" id="remove_comments" name="remove_comments" value="yes"> Remove comments</label><br>
+        </div>
+        <div class="form-check">
+        <label class="form-check-label"><input type="checkbox" class="form-check-input" id="preserve_styles" name="preserve_styles" value="yes"> Don’t remove &lt;style&gt; and &lt;link&gt; elements</label>
+        </div>
+
       </div>
     </div>
 
-    <div class="field button">
-        <button type="submit" class="submit">Submit</button>
+    <div class="mb-3 field button">
+        <button type="submit" class="btn btn-primary">Submit</button>
     </div>
     </form>
 
-
-
-<div class="thanks meta">Many thanks to <a href="http://www.campaignmonitor.com/">Campaign Monitor</a>, Premailer&rsquo;s sponsor.  They do all this inline CSS voodoo automatically each time you send a message, and their <a href="http://www.campaignmonitor.com/features/screens/send-create.aspx">interface</a> is pretty, easy and powerful. If you haven't checked them out yet we heartily recommend you do.</div>
 
 
 
@@ -92,41 +83,27 @@
   <p>For the best HTML e-mail delivery results, CSS should be inline.  This is a huge pain and a simple newsletter becomes un-managable very quickly.  This script is our solution.</p>
 
   <ul class="big">
-    <li>CSS styles are converted to inline style attributes<br />
+    <li class="mb-2">CSS styles are converted to inline style attributes<br />
 
-        <span class="sub">Checks <tt>style</tt> and <tt>link[rel=stylesheet]</tt> tags and preserves existing inline attributes</span>
+        <em>Checks <tt>style</tt> and <tt>link[rel=stylesheet]</tt> tags and preserves existing inline attributes</em>
     </li>
-    <li>Relative paths are converted to absolute paths<br />
-        <span class="sub">Checks links in <tt>href</tt>, <tt>src</tt> and CSS <tt>url('')</tt></span>
+    <li class="mb-2">Relative paths are converted to absolute paths<br />
+        <em>Checks links in <tt>href</tt>, <tt>src</tt> and CSS <tt>url('')</tt></em>
 
     </li>
-    <li>CSS properties are checked against e-mail client capabilities<br />
-        <span class="sub">Based on the <a href="http://www.email-standards.org/">Email Standards Project&rsquo;s guides</a></span>
+    <li class="mb-2">CSS properties are checked against e-mail client capabilities<br />
+        <em>Based on the <a href="http://www.email-standards.org/">Email Standards Project&rsquo;s guides</a></em>
     </li>
-    <li>A plain text version is created</li>
+    <li class="mb-2">A plain text version is created</li>
   </ul>
 
   <p>A few things to note:</p>
   <ul>
-    <li>Things can get messy very quickly with the <tt>*</tt> selector&mdash;be careful</li>
-    <li>Only the <tt>screen</tt>, <tt>handheld</tt> and <tt>all</tt> media types are processed</li>
+    <li class="mb-2">Things can get messy very quickly with the <tt>*</tt> selector&mdash;be careful</li>
+    <li class="mb-2">Only the <tt>screen</tt>, <tt>handheld</tt> and <tt>all</tt> media types are processed</li>
   </ul>
-
-
-  <h2><span>Bookmarklet</span></h2>
-
-  <p>If you&rsquo;re using Firefox 3+, you can use a bookmarklet as a shortcut to processing pages.</p>
-
-  <p>To install, drag this link up to your toolbar: <a style="background: #eee none; padding: 2px 4px; border: 1px solid #ccc;" title="Make CSS inline with Premailer" href="javascript:(function(){document.body.appendChild(document.createElement('script')).src='http://premailer.dialect.ca/inc/bookmarklet-1.0.js';})();">Premailer</a></p>
 
   <h2><span>Premailer API</span></h2>
 
   <p>A beta API for Premailer is now available.  See the <a href="/api">API documentation</a> for details.</p>
-
-
-  <h2><span>Under the hood</span></h2>
-
-  <p>Premailer is written in Ruby, with a lot of help from Nokogiri, Hpricot and the <a href="http://www.sinatrarb.com/">Sinatra</a> framework (goodbye eruby).  The source is available on <a href="http://github.com/alexdunae/premailer/">GitHub</a>.</p>
-
-  <p>Written by Alex Dunae at Dialect. Copyright 2007-.</p>
 </div>

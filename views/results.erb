@@ -1,51 +1,56 @@
-    <h1>Premailer Results</h1>
-    <div class="body">
-    <p>We&rsquo;ve processed <%= @source_description %>, and</p>
-    
-    <ul>
-      <li>made all your CSS inline,</li>
-      <li>changed relative links to absolute links,</li>
-      <% unless @results[:options][:link_query_string].nil? or @results[:options][:link_query_string].empty? %><li>appended <tt>?<%= @results[:options][:link_query_string] %></tt> to your links,</li><% end %>
-      <li>moved any CSS pseudo-classes (like <tt>:hover</tt>) to the <tt>&lt;body&gt;</tt>,</li>
-      <% if @results[:options][:remove_ids] %><li>removed unused IDs,</li><% end %>
-      <% if @results[:options][:remove_classes] %><li>removed classes,</li><% end %>
-      <% if @results[:options][:remove_classes] %><li>removed comments,</li><% end %>
-      <% if @results[:options][:remove_classes] %><li>left &lt;link&gt; and &lt;style&gt; tags in the &lt;head&gt;,</li><% end %>
-      <li>checked your HTML and CSS for compatibility with e-mail programs, and</li>
-      <li>created a plain-text version of your message</li>
-      <% if @results[:options][:adapter] == :nokogiri %><li>using the Nokogiri parser.</li><% end %>
-   </ul>
+<div class="container">
+    <div class="alert alert-info">
+      <p>We&rsquo;ve processed <tt><%= @source_description %></tt>, and</p>
 
-    <div class="thanks meta"><a href="http://www.campaignmonitor.com/testing/">Time for some testing?<br>Campaign Monitor offers a thorough<br>e-mail client testing service</a>.</div>
+      <ul>
+        <li class="mb-2">made all your CSS inline,</li>
+        <li class="mb-2">changed relative links to absolute links,</li>
+        <% unless @results[:options][:link_query_string].nil? or @results[:options][:link_query_string].empty? %><li class="mb-2">appended <tt>?<%= @results[:options][:link_query_string] %></tt> to your links,</li><% end %>
+        <li class="mb-2">moved any CSS pseudo-classes (like <tt>:hover</tt>) to the <tt>&lt;body&gt;</tt>,</li>
+        <% if @results[:options][:remove_ids] %><li class="mb-2">removed unused IDs,</li><% end %>
+        <% if @results[:options][:remove_classes] %><li class="mb-2">removed classes,</li><% end %>
+        <% if @results[:options][:remove_classes] %><li class="mb-2">removed comments,</li><% end %>
+        <% if @results[:options][:remove_classes] %><li class="mb-2">left &lt;link&gt; and &lt;style&gt; tags in the &lt;head&gt;,</li><% end %>
+        <li class="mb-2">checked your HTML and CSS for compatibility with e-mail programs, and</li>
+        <li class="mb-2">created a plain-text version of your message</li>
+    </ul>
+   </div>
 
 
-    <h2><span><a href="<%= @results[:output][:html_file] %>" title="Contents of <%= @url %> with inline CSS">Click to View the HTML results</a></span></h2>
+    <div class="mb-4">
+      <h2>HTML Results</h2>
+      <p><a href="<%= @results[:output][:html_file] %>" title="Contents of <%= @url %> with inline CSS">Click to view the HTML results</a></p>
+      <textarea cols="80" rows="5" id="html_output" class="premailer_output"><%= HTMLEntities.new.encode(@results[:output][:html]) %></textarea>
+    </div>
 
-    <textarea cols="80" rows="5" id="html_output" class="premailer_output"><%= HTMLEntities.new.encode(@results[:output][:html]) %></textarea>
+    <div class="mb-4">
+      <h2>Plaintext Results</h2>
+      <p><a href="<%= @results[:output][:txt_file] %>" title="Contents of <%= @url %> converted to plain text">Click to view the plain-text results</a></p>
+      <textarea cols="80" rows="5" id="txt_output" class="premailer_output"><%= @results[:output][:txt] %></textarea>
+    </div>
 
-    <h2><span><a href="<%= @results[:output][:txt_file] %>" title="Contents of <%= @url %> converted to plain text">Click to View the plain-text results</a></span></h2>
-
-    <textarea cols="80" rows="5" id="txt_output" class="premailer_output"><%= @results[:output][:txt] %></textarea>
-
-    <script type="text/javascript">
+  <script type="text/javascript">
     <%  action_label = @source_description == 'your HTML content' ? 'Uploaded HTML' : 'Remote file' %>
     try {
       pageTracker._trackEvent("Premailer", "Processed", "<%= action_label %>");
 
-    } catch(err) {} 
-    </script>
-    <div class="meta thanks">Results not what you expected?  You can <a href="https://github.com/alexdunae/premailer/issues">create a bug report on GitHub</a>.  Be sure to include the URL that caused the problems.</div>
+    } catch(err) {}
+  </script>
+  <div class="meta thanks">Results not what you expected?  You can <a href="https://github.com/alexdunae/premailer/issues">create a bug report on GitHub</a>.  Be sure to include the URL that caused the problems.</div>
+</div>
+
 <% if @results[:warnings] %>
-<br>
-  <h2><span>HTML and CSS warnings</span></h2>
+<div class="container">
+
+  <h2 class="mt-4"><span>HTML and CSS warnings</span></h2>
 
   <% if @results[:warnings].length > 0 %>
 
   <p>Warnings are generated from several sources, including the <a href="http://www.email-standards.org/">Email Standards Project&rsquo;s guides</a>.</p>
 
-  
 
-  <table class="warnings" id="premailer-warnings" summary="List of HTML and CSS warnings">
+
+  <table class="table warnings" id="premailer-warnings" summary="List of HTML and CSS warnings">
   <thead>
     <tr>
       <th>Property</th>
@@ -54,7 +59,21 @@
     </tr>
     <tbody>
     <% @results[:warnings].each do |w| %>
-    <tr class="<%= w[:level].downcase %>">
+    <%
+      klass = case w[:level].downcase
+      when "poor"
+        "table-danger"
+      when "risky"
+        "table-warning"
+      else
+        "table-default"
+      end
+
+
+
+
+    %>
+    <tr class="<%= klass %>">
       <td class="property"><%= w[:message] %></td>
       <td class="level"><%= w[:level].capitalize %></td>
       <td><%= w[:clients] %></td>
@@ -66,4 +85,5 @@
 <p>None.</p>
 <% end %>
 <% end %>
+</div>
 </div>
