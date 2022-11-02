@@ -5,8 +5,7 @@
 For local development, copy `.env.sample` to `.env` and update with your S3 credentials.
 
 ```
-bundle install
-bundle exec rackup
+docker-compose up
 ```
 
 If you begin hosting a web version please let me know so I can link you from the
