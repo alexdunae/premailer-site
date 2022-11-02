@@ -4,7 +4,6 @@ $LOAD_PATH << File.join(File.dirname(__FILE__), 'lib')
 require 'dotenv/load'
 require 'sinatra'
 require 'sinatra/reloader' if development?
-require 'haml'
 require 'nokogiri'
 require 'hpricot'
 require 'builder'
