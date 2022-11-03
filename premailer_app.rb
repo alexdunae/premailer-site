@@ -59,56 +59,56 @@ post '/' do
   end
 end
 
-# get '/api' do
-#   erb :api
-# end
+get '/api' do
+  erb :api
+end
 
-# post '/api/0.1/documents' do
-#   content_type 'application/json', charset: 'utf-8'
-#   opts = {}
-#   source = nil
+post '/api/0.1/documents' do
+  content_type 'application/json', charset: 'utf-8'
+  opts = {}
+  source = nil
 
-#   if params[:html] && !params[:html].empty?
-#     opts[:with_html_string] = true
-#     source = params[:html]
-#   elsif params[:url] && !params[:url].empty?
-#     source = params[:url]
-#   else
-#     return 400, [{ message: 'No input file specified', version: '0.1', status: 400 }.to_json]
-#   end
+  if params[:html] && !params[:html].empty?
+    opts[:with_html_string] = true
+    source = params[:html]
+  elsif params[:url] && !params[:url].empty?
+    source = params[:url]
+  else
+    return 400, [{ message: 'No input file specified', version: '0.1', status: 400 }.to_json]
+  end
 
-#   opts[:adapter] = :nokogiri
-#   opts[:base_url] = params[:base_url].strip if params[:base_url]
-#   opts[:line_length] = params[:line_length].strip.to_i if params[:line_length]
-#   opts[:link_query_string] = params[:link_query_string].strip if params[:link_query_string]
-#   opts[:preserve_styles] = params[:preserve_styles] && (params[:preserve_styles] == 'false') ? false : true
-#   opts[:remove_ids] = params[:remove_ids] && (params[:remove_ids] == 'true') ? true : false
-#   opts[:remove_classes] = params[:remove_classes] && (params[:remove_classes] == 'true') ? true : false
-#   opts[:remove_comments] = params[:remove_comments] && (params[:remove_comments] == 'true') ? true : false
+  opts[:adapter] = :nokogiri
+  opts[:base_url] = params[:base_url].strip if params[:base_url]
+  opts[:line_length] = params[:line_length].strip.to_i if params[:line_length]
+  opts[:link_query_string] = params[:link_query_string].strip if params[:link_query_string]
+  opts[:preserve_styles] = params[:preserve_styles] && (params[:preserve_styles] == 'false') ? false : true
+  opts[:remove_ids] = params[:remove_ids] && (params[:remove_ids] == 'true') ? true : false
+  opts[:remove_classes] = params[:remove_classes] && (params[:remove_classes] == 'true') ? true : false
+  opts[:remove_comments] = params[:remove_comments] && (params[:remove_comments] == 'true') ? true : false
 
-#   result = process_url(source, opts.merge(io_exceptions: false))
+  result = process_url(source, opts.merge(io_exceptions: false))
 
-#   output = {
-#     version:   '0.1',
-#     status:    result[:status].to_i,
-#     message:   result[:message],
-#     options:   opts,
-#     documents: {
-#       html: result[:output][:html_file],
-#       txt:  result[:output][:txt_file]
-#     }
-#   }
+  output = {
+    version:   '0.1',
+    status:    result[:status].to_i,
+    message:   result[:message],
+    options:   opts,
+    documents: {
+      html: result[:output][:html_file],
+      txt:  result[:output][:txt_file]
+    }
+  }
 
-#   if output[:status] == 500
-#     status 500
-#   else
-#     response.header['Location'] = result[:output][:html_file]
-#     expires 7200, :private
-#     status 201
-#   end
+  if output[:status] == 500
+    status 500
+  else
+    response.header['Location'] = result[:output][:html_file]
+    expires 7200, :private
+    status 201
+  end
 
-#   body(output.to_json)
-# end
+  body(output.to_json)
+end
 
 get '/feedback' do
   erb :feedback
