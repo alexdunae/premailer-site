@@ -1,10 +1,9 @@
+<div class="container">
 <h1>Premailer API Beta</h1>
-
-<h2><span>Preview Version 0.1</span></h2>
 
 <p>Premailer is now available via an API, so you can tie it in to your own apps.</p>
 
-<p>This is a preview release and may change over the next little while. All feedback is most welcome and can be sent to 'code' at dialect.ca.</p>
+<p>This is a preview release and may change over the next little while. All feedback is most welcome and can be sent to 'code' at dunae.ca.</p>
 
 <p>We're still working out the best model for this API going forward.  Ideally we'd like to run it by donation.  In the longterm, if ever we decide to discontinue the service we will give 30 days notice and post the complete source code for the web interface at that time.  Hopefully that makes your future planning a little easier.</p>
 
@@ -12,11 +11,11 @@
 
 <h3>Sending a request</h3>
 
-<p>The Premailer API is accessed via an <tt>HTTP POST</tt> to <tt>http://premailer.dialect.ca/api/0.1/documents</tt></p>
+<p>The Premailer API is accessed via an <tt>HTTP POST</tt> to <tt>https://premailer.dialect.ca/api/0.1/documents</tt></p>
 
 <p>One of either the <tt>url</tt> or <tt>html</tt> fields must be provided. All other fields are optional.</p>
 
-<table summary="Premailer API request fields">
+<table summary="Premailer API request fields" class="table">
 <caption>Request fields</caption>
 <thead>
   <tr>
@@ -95,7 +94,7 @@
 
 <p>The response includes links to the generated HTML and plain text files.  The URL of the resulting HTML file is also set in the <tt>Location: </tt> header.  These links are valid for two hours (specified in the <tt>Expires</tt> header).</p>
 
-<table summary="Premailer API response fields">
+<table summary="Premailer API response fields" class="table">
 <caption>Response fields</caption>
 <thead>
   <tr>
@@ -182,3 +181,4 @@ Expires: Wed, 07 Sep 2011 23:15:04 GMT
       }
   }
 </code></pre>
+</div>
