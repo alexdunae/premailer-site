@@ -12,6 +12,6 @@ gem 'nokogiri'
 gem 'premailer'
 gem 'rack-throttle'
 gem 'redis'
-gem 'sinatra', '~> 3.0.2'
+gem 'sinatra', '~> 3.0.4'
 gem 'puma'
 gem 'webrick' # required for AWS
